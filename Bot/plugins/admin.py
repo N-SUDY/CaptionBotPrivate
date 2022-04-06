@@ -22,3 +22,5 @@ async def password(c: Client, m: Message):
     if pass.text.startswith("کنسل"):
         await pass.reply("فرایند کنسل شد", quote=True)
         return True
+    else:
+        return pass.text 
