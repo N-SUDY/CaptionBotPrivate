@@ -9,7 +9,7 @@ async def start(b, m : Message):
     usr_cmd = m.text.split("_")[-1]
     if usr_cmd == "/start":
         await m.reply(
-            text=f"""Hey {m.from_user.mention(style="md")}, I'm the caption editor bot\nسلام {m.from_user.mention(style="md")} عزیز 🙋🏻‍♂️\nمن بات ادیت کپشن هستم\nفایل تلگرامی خود را ارسال کنید تا کپشن آن را ادیت کنم""",
+            text=f"""سلام {m.from_user.mention(style="md")} عزیز 🙋🏻‍♂️\nمن بات ادیت کپشن هستم\nفایل تلگرامی خود را ارسال کنید تا کپشن آن را ادیت کنم""",
             reply_markup=InlineKeyboardMarkup(
                 [
                     [InlineKeyboardButton('✵ Developer ✵', url='https://t.me/CipherXBot')]
