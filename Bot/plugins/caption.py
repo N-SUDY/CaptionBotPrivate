@@ -24,12 +24,12 @@ async def incoming(c: Client, m: Message):
       file=m.audio.file_id
       type_="audio"
     else:
-      return await m.reply("UnSupported File")
-    await c.edit_message_caption(chat_id=m.chat.id, message_id=m.message_id, caption=caption)
+      return await m.reply("فرمت فایل پشتیبانی نمی شود")
     caption = await get_caption(c, m)
     if caption is True:
         return
     await m.copy(chat_id=m.chat.id, caption=caption, reply_to_message_id=m.message_id)
+    await c.edit_message_caption(chat_id=m.chat.id, message_id=m.message_id, caption=caption)
 
 async def get_caption(c: Client, m: Message):
     caption = await c.ask(m.chat.id, "کپشن خود را ارسال نمایید. برای کنسل کردن این فرایند بنویسید `کنسل`")
