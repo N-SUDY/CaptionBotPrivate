@@ -4,8 +4,9 @@ from pyrogram import Client, filters
 from pyrogram.types import Message
 
 from Bot import app
+from Bot.plugins import * 
 
-@app.on_message(filters.private & filters.media & ~filters.edited, group=4)
+@app.on_message(filters.user(ADMINS) & filters.private & filters.media & ~filters.edited, group=4)
 async def incoming(c: Client, m: Message):
     caption = await get_caption(c, m)
     if caption is True:
