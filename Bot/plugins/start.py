@@ -2,7 +2,7 @@ from pyrogram import filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message
 
 from Bot import app
-from . import * 
+from Bot.plugins import * 
 
 @app.on_message(filters.user(ADMINS) & filters.command('start') & filters.incoming & filters.private & ~filters.edited)
 async def start(b, m : Message):
