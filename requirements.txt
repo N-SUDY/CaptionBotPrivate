@@ -1,0 +1,7 @@
+asyncio
+dnspython
+motor
+pyrogram
+pyromod
+python-dotenv
+tgcrypto
