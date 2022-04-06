@@ -13,7 +13,6 @@ async def add_admin(c: Client, m : Message):
     else:
         return 
 
-
 @app.on_message(filters.user(ADMINS) & filters.command('پسورد') & filters.incoming & filters.private & ~filters.edited)
 async def password(c: Client, m: Message):
     pass = await c.ask(m.chat.id, "پسورد مورد نظر خود را برای افزودن ادمین و دسترسی به بات وارد نمایید. برای کنسل کردن این فرایند بنویسید `کنسل`")
