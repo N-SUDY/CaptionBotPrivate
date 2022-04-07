@@ -15,6 +15,6 @@ async def verifys(c: Client, m: Message):
         if not verify.text:
             await verify.reply("پسوردی یافت نشد", quote=True)
             return await verifys(c, m)
-    if not verify.text in PASS:
-        await verify.reply("پسورد اشتباه است و شما نمی‌توانید از بات استفاده نمایید", quote=True)
-        return True
+        if not verify.text in PASS:
+            await verify.reply("پسورد اشتباه است و شما نمی‌توانید از بات استفاده نمایید", quote=True)
+            return True
