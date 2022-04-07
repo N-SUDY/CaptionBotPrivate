@@ -58,7 +58,7 @@ async def add_paas(c: Client, m: Message):
                 p = await c.ask(m.chat.id, "آیدی عددی مورد نظر خود را برای حذف ادمین و عدم دسترسی به بات وارد نمایید. برای کنسل کردن این فرایند بنویسید `کنسل`")
                 if not p.text.startswith("کنسل"):
                     if p.text.isnumeric() is True:
-                        if not p.text in x:
+                        if not int(p.text) in x:
                             await p.reply("آیدی در لیست ادمین ها یافت نشد", quote=True) 
                             return True 
                         else:
