@@ -20,4 +20,6 @@ async def passphrase(c: Client, m: Message):
 async def show_list(c: Client, m: Message):
     cmd = m.text.split("_")[-1]
     if cmd.startswith("/show"):
-        await m.reply(f"{x}", quote=True) 
+        vf = await verifys(c, m) 
+        if vf is id:
+            await m.reply(f"{x}", quote=True) 
