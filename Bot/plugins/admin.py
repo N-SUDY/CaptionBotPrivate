@@ -74,7 +74,7 @@ async def show_list_pass(c: Client, m: Message):
             if not id in x:
                 vf = await verifys(c, m) 
             else:
-                await m.reply(f"{PASS}", quote=True) 
+                await m.reply(f"{PASS}") 
         except Exception as e:
             return 
 
@@ -89,9 +89,10 @@ async def add_paas(c: Client, m: Message):
                 vf = await verifys(c, m) 
             else:
                 p = await c.ask(m.chat.id, "پسورد مورد نظر خود را برای افزودن ادمین و دسترسی به بات وارد نمایید. برای کنسل کردن این فرایند بنویسید `کنسل`")
-                PASS.append(p)
-                await p.reply("پسورد جدید با موفقیت افزوده شد", quote=True) 
-                return True
+                if p.text:
+                    PASS.append(p)
+                    await p.reply("پسورد جدید با موفقیت افزوده شد", quote=True) 
+                    return True
                 if not p.text:
                     await p.reply("پسوردی یافت نشد", quote=True) 
                 if p.text.startswith("کنسل"):
