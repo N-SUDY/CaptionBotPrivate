@@ -1,16 +1,16 @@
 from pyrogram import Client, filters
 from pyrogram.types import Message
 
-ADMINS = []
+x = []
 PASS = ["cipherx"]
 
 
 async def verifys(c: Client, m: Message):
     id = m.from_user.id
-    if not id in ADMINS:
+    if not id in x:
         verify = await c.ask(m.chat.id, "پسورد را وارد کنید")
         if verify.text in PASS:
-            ADMINS.append(id) 
+            x.append(id) 
             await m.reply("شما به لیست ادمین ها افزوده شدید و هم اکنون میتوانید از بات استفاده نمایید", quote=True) 
         if not verify.text:
             await verify.reply("پسوردی یافت نشد", quote=True)
