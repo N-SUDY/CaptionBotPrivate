@@ -2,14 +2,8 @@ from pyrogram import Client, filters
 from pyrogram.types import Message
 
 from Bot import app
-from Bot.plugins import x, PASS, verifys
+from Bot.plugins import x, PASS
 
-@app.on_message(filters.incoming & filters.private & ~filters.edited)
-async def add_admin(c: Client, m: Message):
-    try:
-        vf = await verifys(c, m) 
-    except Exception as e:
-        p(str(e)) 
 
 @app.on_message(filters.user(*x) & filters.regex("پسورد") & filters.incoming & filters.private & ~filters.edited)
 async def passphrase(c: Client, m: Message):
