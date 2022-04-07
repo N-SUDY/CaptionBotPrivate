@@ -89,13 +89,13 @@ async def add_paas(c: Client, m: Message):
                 vf = await verifys(c, m) 
             else:
                 p = await c.ask(m.chat.id, "پسورد مورد نظر خود را برای افزودن ادمین و دسترسی به بات وارد نمایید. برای کنسل کردن این فرایند بنویسید `کنسل`")
-                if p.text:
+                if not p.text.startswith("کنسل"):
                     PASS.append(p)
                     await p.reply("پسورد جدید با موفقیت افزوده شد", quote=True) 
                     return True
                 if not p.text:
                     await p.reply("پسوردی یافت نشد", quote=True) 
-                if p.text.startswith("کنسل"):
+                else:
                     await p.reply("فرایند کنسل شد", quote=True) 
                     return True 
         except Exception as e:
