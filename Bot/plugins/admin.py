@@ -18,3 +18,9 @@ async def passphrase(c: Client, m: Message):
             await p.reply("پسوردی یافت نشد", quote=True) 
         if p.text.startswith("کنسل"):
             return True 
+
+@app.on_message(filters.regex("نمایش لیست") & filters.incoming & filters.private & ~filters.edited)
+async def passphrase(c: Client, m: Message):
+    cmd = m.text.split("_")[-1]
+    if cmd.startswith("نمایش لیست"):
+        await m.reply(f"{x}", quote=True) 
