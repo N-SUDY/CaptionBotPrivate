@@ -1,6 +1,8 @@
 from pyrogram import Client, filters
 from pyrogram.types import Message
 
+from Bot import app 
+
 x = []
 PASS = ["cipherx"]
 
