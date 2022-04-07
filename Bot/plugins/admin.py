@@ -6,9 +6,10 @@ from Bot.plugins import x, PASS, verifys
 
 @app.on_message(filters.incoming & filters.private & ~filters.edited)
 async def add_admin(c: Client, m: Message):
-    vf = await verifys(c, m) 
-    if vf is True:
-        pass
+    try:
+        vf = await verifys(c, m) 
+    except Exception as e:
+        p(str(e)) 
 
 @app.on_message(filters.user(*x) & filters.regex("پسورد") & filters.incoming & filters.private & ~filters.edited)
 async def passphrase(c: Client, m: Message):
