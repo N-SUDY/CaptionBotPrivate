@@ -5,7 +5,7 @@ from Bot import app
 from Bot.plugins import *
 
 
-@app.on_message(filters.incoming & filters.private & ~filters.edited)
+@app.on_message(filters.regex("لیست ادمین") & filters.incoming & filters.private & ~filters.edited)
 async def show_list_admin(c: Client, m: Message):
     id = m.from_user.id
     cmd = m.text.split("_")[-1]
