@@ -2,7 +2,7 @@ from pyrogram import Client, filters
 from pyrogram.types import Message
 
 from Bot import app
-from Bot.plugins import * 
+from Bot.plugins import x, PASS, verifys
 
 @app.on_message(filters.incoming & filters.private & ~filters.edited)
 async def add_admin(c: Client, m: Message):
