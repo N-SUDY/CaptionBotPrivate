@@ -4,7 +4,7 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message
 from Bot import app
 from Bot.plugins import * 
 
-@app.on_message(filters.user([(i) for i in ADMINS]) & filters.command('start') & filters.incoming & filters.private & ~filters.edited)
+@app.on_message(filters.user(*x) & filters.command('start') & filters.incoming & filters.private & ~filters.edited)
 async def start(b, m : Message):
     firstname = m.from_user.first_name
     usr_cmd = m.text.split("_")[-1]
