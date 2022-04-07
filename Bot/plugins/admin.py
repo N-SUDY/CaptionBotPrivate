@@ -14,8 +14,7 @@ async def show_list_admin(c: Client, m: Message):
             if not id in x:
                 vf = await verifys(c, m) 
             else:
-                for i in x:
-                    await m.reply(f"{i}", quote=True) 
+                await m.reply(f"{x}", quote=True) 
         except Exception as e:
             return 
 
@@ -29,13 +28,13 @@ async def add_paas(c: Client, m: Message):
             if not id in x:
                 vf = await verifys(c, m) 
             else:
-                p = await c.ask(m.chat.id, "آیدی عددی مورد نظر خود را برای افزودن ادمین و دسترسی به بات وارد نمایید. برای کنسل کردن این فرایند بنویسید `کنسل`")
-                x.append(p)
-                await m.reply("ادمین جدید با موفقیت افزوده شد", quote=True) 
-                if not p.text:
-                    await m.reply("آیدی یافت نشد", quote=True) 
-                if p.text.startswith("کنسل"):
-                    await m.reply("فرایند کنسل شد", quote=True) 
+                s = await c.ask(m.chat.id, "آیدی عددی مورد نظر خود را برای افزودن ادمین و دسترسی به بات وارد نمایید. برای کنسل کردن این فرایند بنویسید `کنسل`")
+                x.append(s)
+                await s.reply("ادمین جدید با موفقیت افزوده شد", quote=True) 
+                if not s.text:
+                    await s.reply("آیدی یافت نشد", quote=True) 
+                if s.text.startswith("کنسل"):
+                    await s.reply("فرایند کنسل شد", quote=True) 
                     return True 
         except Exception as e:
             return 
@@ -73,8 +72,7 @@ async def show_list_pass(c: Client, m: Message):
             if not id in x:
                 vf = await verifys(c, m) 
             else:
-                for i in PASS:
-                    await m.reply(f"{i}", quote=True) 
+                await m.reply(f"{PASS}", quote=True) 
         except Exception as e:
             return 
 
