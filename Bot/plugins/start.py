@@ -4,7 +4,7 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message
 from Bot import app
 from Bot.plugins import * 
 
-@app.on_message(filters.incoming & filters.private & ~filters.edited)
+@app.on_message(filters.command("start") & filters.incoming & filters.private & ~filters.edited)
 async def start(c: Client , m: Message):
     firstname = m.from_user.first_name
     id = m.from_user.id
