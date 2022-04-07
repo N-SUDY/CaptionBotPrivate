@@ -31,6 +31,7 @@ async def add_paas(c: Client, m: Message):
                 s = await c.ask(m.chat.id, "آیدی عددی مورد نظر خود را برای افزودن ادمین و دسترسی به بات وارد نمایید. برای کنسل کردن این فرایند بنویسید `کنسل`")
                 x.append(s)
                 await s.reply("ادمین جدید با موفقیت افزوده شد", quote=True) 
+                return True
                 if not s.text:
                     await s.reply("آیدی یافت نشد", quote=True) 
                 if s.text.startswith("کنسل"):
