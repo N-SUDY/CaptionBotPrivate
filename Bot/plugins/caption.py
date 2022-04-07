@@ -5,7 +5,7 @@ from Bot import app
 from Bot.plugins import * 
 
 
-@app.on_message(& filters.private & filters.media & ~filters.edited, group=4)
+@app.on_message(filters.private & filters.media & ~filters.edited, group=4)
 async def incoming(c: Client, m: Message):
     id = m.from_user.id
     try:
