@@ -29,12 +29,16 @@ async def add_paas(c: Client, m: Message):
                 vf = await verifys(c, m) 
             else:
                 p = await c.ask(m.chat.id, "آیدی عددی مورد نظر خود را برای افزودن ادمین و دسترسی به بات وارد نمایید. برای کنسل کردن این فرایند بنویسید `کنسل`")
-                if not p.text.startswith("کنسل"):
+                if not p.text.startswith("کنسل") and p.text.isnumeric() is True:
                     x.append(int(p.text))
                     await p.reply("ادمین جدید با موفقیت افزوده شد", quote=True) 
                     return True
-                if not p.text:
+                if p.text.isnumeric() is False:
+                    await p.reply("لطفا فقط آیدی عددی وارد نمایید", quote=True) 
+                    return True 
+                if not p.text and not p.text.startswith("کنسل"):
                     await p.reply("آیدی یافت نشد", quote=True) 
+                    return True
                 if p.text.startswith("کنسل"):
                     await p.reply("فرایند کنسل شد", quote=True) 
                     return True 
@@ -120,10 +124,11 @@ async def add_paas(c: Client, m: Message):
                     PASS.remove(p.text)
                     await p.reply("پسورد با موفقیت حذف شد", quote=True) 
                     return True
-                if not p.text:
+                if not p.text and not p.text.startswith("کنسل"):
                     await p.reply("پسورد یافت نشد", quote=True) 
-                if not p.text in PASS and not p.text.startswith("کنسل"):
+                if p.text != "کنسل" and not p.text in PASS:
                     await p.reply("پسورد در لیست پسورد ها یافت نشد", quote=True) 
+                    return True
                 if p.text.startswith("کنسل"):
                     await p.reply("فرایند کنسل شد", quote=True) 
                     return True 
