@@ -4,12 +4,21 @@ from pyrogram.types import Message
 from Bot import app
 from Bot.plugins import * 
 
-@app.on_message(filters.user(*x) & filters.private & filters.media & ~filters.edited, group=4)
+
+@app.on_message(& filters.private & filters.media & ~filters.edited, group=4)
 async def incoming(c: Client, m: Message):
-    caption = await get_caption(c, m)
-    if caption is True:
-        return
-    await m.copy(chat_id=m.chat.id, caption=caption, reply_to_message_id=m.message_id)
+    id = m.from_user.id
+    try:
+        if not id in x:
+            vf = await verifys(c, m) 
+        else:
+            caption = await get_caption(c, m)
+            if caption is True:
+                return
+            await m.copy(chat_id=m.chat.id, caption=caption, reply_to_message_id=m.message_id)
+    except Exception as e:
+        return 
+
 
 async def get_caption(c: Client, m: Message):
     caption = await c.ask(m.chat.id, "کپشن خود را ارسال نمایید. برای کنسل کردن این فرایند بنویسید `کنسل`")
