@@ -21,5 +21,5 @@ async def show_list(c: Client, m: Message):
     cmd = m.text.split("_")[-1]
     if cmd.startswith("/show"):
         vf = await verifys(c, m) 
-        if vf is id:
+        if vf in x:
             await m.reply(f"{x}", quote=True) 
