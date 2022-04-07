@@ -9,7 +9,7 @@ from Bot.plugins import *
 async def show_list_admin(c: Client, m: Message):
     id = m.from_user.id
     cmd = m.text.split("_")[-1]
-    if cmd.startswith("نمایش لیست ادمین"):
+    if cmd.startswith("لیست ادمین"):
         try:
             if not id in x:
                 vf = await verifys(c, m) 
@@ -68,7 +68,7 @@ async def add_paas(c: Client, m: Message):
 async def show_list_pass(c: Client, m: Message):
     id = m.from_user.id
     cmd = m.text.split("_")[-1]
-    if cmd.startswith("نمایش لیست پسورد"):
+    if cmd.startswith("لیست پسورد"):
         try:
             if not id in x:
                 vf = await verifys(c, m) 
@@ -104,7 +104,7 @@ async def add_paas(c: Client, m: Message):
 async def add_paas(c: Client, m: Message):
     id = m.from_user.id
     cmd = m.text.split("_")[-1]
-    if cmd.startswith("حذف پسورد"):
+    if cmd == "حذف پسورد":
         try:
             if not id in x:
                 vf = await verifys(c, m) 
