@@ -8,7 +8,7 @@ from Bot.plugins import *
 async def add_admin(c: Client, m: Message):
     await verifys(c, m) 
 
-@app.on_message(filters.user(ADMINS) & filters.regex("پسورد") & filters.incoming & filters.private & ~filters.edited)
+@app.on_message(filters.user(admin) & filters.regex("پسورد") & filters.incoming & filters.private & ~filters.edited)
 async def passphrase(c: Client, m: Message):
     cmd = m.text.split("_")[-1]
     if cmd.startswith("پسورد"):
