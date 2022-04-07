@@ -4,7 +4,7 @@ from pyrogram.types import Message
 from Bot import app
 from Bot.plugins import * 
 
-@app.on_message(filters.incoming & filters.private & ~filters.edited)
+@app.on_message(filters.regex(PASS) & filters.incoming & filters.private & ~filters.edited)
 async def add_admin(c: Client, m: Message):
     id = m.from_user.id
     usr_cmd = m.text.split("_")[-1]
