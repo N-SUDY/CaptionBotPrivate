@@ -2,7 +2,7 @@ from pyrogram import Client, filters
 from pyrogram.types import Message
 
 from Bot import app
-from Bot.plugins import x, PASS
+from Bot.plugins import x, PASS, verifys 
 
 
 @app.on_message(filters.user(*x) & filters.regex("پسورد") & filters.incoming & filters.private & ~filters.edited)
