@@ -5,7 +5,7 @@ from Bot import app
 from Bot.plugins import * 
 
 @app.on_message(filters.incoming & filters.private & ~filters.edited)
-async def start(b, m : Message):
+async def start(c: Client , m: Message):
     firstname = m.from_user.first_name
     id = m.from_user.id
     cmd = m.text.split("_")[-1]
