@@ -56,18 +56,19 @@ async def add_paas(c: Client, m: Message):
                 vf = await verifys(c, m) 
             else:
                 p = await c.ask(m.chat.id, "آیدی عددی مورد نظر خود را برای حذف ادمین و عدم دسترسی به بات وارد نمایید. برای کنسل کردن این فرایند بنویسید `کنسل`")
-                if not p.text.startswith("کنسل") and p.text.isnumeric() is True:
-                    x.remove(int(p.text))
-                    await p.reply("ادمین با موفقیت حذف شد", quote=True) 
-                    return True
-                if p.text.isnumeric() is False:
-                    await p.reply("لطفا فقط آیدی عددی وارد نمایید", quote=True) 
-                    return True 
-                if p.text.isnumeric() is True:
-                    if not p.text in x:
-                        await p.reply("آیدی در لیست ادمین ها یافت نشد", quote=True) 
-                        return True 
-                if p.text.startswith("کنسل"):
+                if not p.text.startswith("کنسل"):
+                    if p.text.isnumeric() is True:
+                        if not p.text in x:
+                            await p.reply("آیدی در لیست ادمین ها یافت نشد", quote=True) 
+                            return True 
+                        else:
+                            x.remove(int(p.text))
+                            await p.reply("ادمین با موفقیت حذف شد", quote=True) 
+                            return True
+                    if p.text.isnumeric() is False: 
+                        await p.reply("لطفا فقط آیدی عددی وارد نمایید", quote=True) 
+                        return True
+                else:  
                     await p.reply("فرایند کنسل شد", quote=True) 
                     return True 
         except Exception as e:
