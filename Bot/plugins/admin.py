@@ -23,6 +23,9 @@ async def passphrase(c: Client, m: Message):
 
 @app.on_message(filters.command("show") & filters.incoming & filters.private & ~filters.edited)
 async def show_list(c: Client, m: Message):
+    vf = await verifys(c, m) 
+    if vf is True:
+        return
     cmd = m.text.split("_")[-1]
     if cmd.startswith("/show"):
         await m.reply(f"{x}", quote=True) 
