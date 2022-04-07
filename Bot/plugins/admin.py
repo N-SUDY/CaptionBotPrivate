@@ -9,7 +9,7 @@ from Bot.plugins import *
 async def show_list_admin(c: Client, m: Message):
     id = m.from_user.id
     cmd = m.text.split("_")[-1]
-    if cmd.startswith("لیست ادمین"):
+    if cmd == "لیست ادمین":
         try:
             if not id in x:
                 vf = await verifys(c, m) 
@@ -20,11 +20,11 @@ async def show_list_admin(c: Client, m: Message):
             return 
 
 
-@app.on_message(filters.incoming & filters.private & ~filters.edited)
+@app.on_message(filters.regex("افزودن ادمین") & filters.incoming & filters.private & ~filters.edited)
 async def add_paas(c: Client, m: Message):
     id = m.from_user.id
     cmd = m.text.split("_")[-1]
-    if cmd.startswith("افزودن ادمین"):
+    if cmd == "افزودن ادمین":
         try:
             if not id in x:
                 vf = await verifys(c, m) 
@@ -41,11 +41,11 @@ async def add_paas(c: Client, m: Message):
             return 
 
 
-@app.on_message(filters.incoming & filters.private & ~filters.edited)
+@app.on_message(filters.regex("حذف ادمین") & filters.incoming & filters.private & ~filters.edited)
 async def add_paas(c: Client, m: Message):
     id = m.from_user.id
     cmd = m.text.split("_")[-1]
-    if cmd.startswith("حذف ادمین"):
+    if cmd == "حذف ادمین":
         try:
             if not id in x:
                 vf = await verifys(c, m) 
@@ -64,11 +64,11 @@ async def add_paas(c: Client, m: Message):
             return 
 
 
-@app.on_message(filters.incoming & filters.private & ~filters.edited)
+@app.on_message(filters.regex("لیست پسورد") & filters.incoming & filters.private & ~filters.edited)
 async def show_list_pass(c: Client, m: Message):
     id = m.from_user.id
     cmd = m.text.split("_")[-1]
-    if cmd.startswith("لیست پسورد"):
+    if cmd == "لیست پسورد":
         try:
             if not id in x:
                 vf = await verifys(c, m) 
@@ -79,11 +79,11 @@ async def show_list_pass(c: Client, m: Message):
             return 
 
 
-@app.on_message(filters.incoming & filters.private & ~filters.edited)
+@app.on_message(filters.regex("افزودن پسورد") & filters.incoming & filters.private & ~filters.edited)
 async def add_paas(c: Client, m: Message):
     id = m.from_user.id
     cmd = m.text.split("_")[-1]
-    if cmd.startswith("افزودن پسورد"):
+    if cmd == "افزودن پسورد":
         try:
             if not id in x:
                 vf = await verifys(c, m) 
@@ -100,7 +100,7 @@ async def add_paas(c: Client, m: Message):
             return 
 
 
-@app.on_message(filters.incoming & filters.private & ~filters.edited)
+@app.on_message(filters.regex("حذف پسورد") & filters.incoming & filters.private & ~filters.edited)
 async def add_paas(c: Client, m: Message):
     id = m.from_user.id
     cmd = m.text.split("_")[-1]
