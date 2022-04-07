@@ -17,7 +17,7 @@ async def add_admin(c: Client, m : Message):
 async def passphrase(c: Client, m: Message):
     usr_cmd = m.text.split("_")[-1]
     if usr_cmd.startswith("پسورد"):
-        pass = await c.ask(m.chat.id, "پسورد مورد نظر خود را برای افزودن ادمین و دسترسی به بات وارد نمایید. برای کنسل کردن این فرایند بنویسید `کنسل`")
+        pass = await c.ask(m.chat.id, """پسورد مورد نظر خود را برای افزودن ادمین و دسترسی به بات وارد نمایید. برای کنسل کردن این فرایند بنویسید `کنسل`""")
         PASS.append(pass)
         if not pass.text:
             await pass.reply("پسوردی یافت نشد", quote=True) 
