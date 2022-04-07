@@ -13,16 +13,15 @@ async def add_admin(c: Client, m : Message):
     else:
         return 
 
-@app.on_message(filters.user(ADMINS) & filters.regex('پسورد') & filters.incoming & filters.private & ~filters.edited)
-async def password(c: Client, m: Message):
+@app.on_message(filters.user(ADMINS) & filters.regex("پسورد") & filters.incoming & filters.private & ~filters.edited) 
+async def passphrase(c: Client, m: Message):
     usr_cmd = m.text.split("_")[-1]
-    if usr_cmd.startswith("پسورد"): 
-        pass = await c.ask(m.chat.id, "پسورد خود برای دسترسی ادمین ارسال نمایید. برای کنسل کردن این فرایند بنویسید `کنسل`") 
-        PASS.append(pass) 
+    if usr_cmd.startswith("پسورد"):
+        pass = await c.ask(m.chat.id, "پسورد مورد نظر خود را برای افزودن ادمین و دسترسی به بات وارد نمایید. برای کنسل کردن این فرایند بنویسید `کنسل`")
+        PASS.append(pass)
         if not pass.text:
-            await pass.reply("پسوردی یافت نشد", quote=True)
+            await pass.reply("پسوردی یافت نشد", quote=True) 
         if pass.text.startswith("کنسل"):
-            await pass.reply("فرایند کنسل شد", quote=True)
-            return True
+            return True 
         else:
-            return pass.text 
+            return pass.text
