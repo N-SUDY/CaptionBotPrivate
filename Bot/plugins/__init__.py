@@ -1,2 +1,2 @@
 ADMINS = []
-PASS = []
+PASS = ["cipherx"]
