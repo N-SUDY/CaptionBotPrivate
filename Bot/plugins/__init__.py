@@ -2,7 +2,19 @@ from pyrogram import Client, filters
 from pyrogram.types import Message 
 
 x = []
+
 PASS = ["ok"]
+
+help = """
+🎆 راهنمای بات :
+✨ افزودن ادمین
+✨ حذف ادمین 
+✨ لیست ادمین 
+✨ افزودن پسورد 
+✨ حذف پسورد 
+✨ لیست پسورد 
+"""
+
 
 async def verifys(c: Client, m: Message):
     id = m.from_user.id
