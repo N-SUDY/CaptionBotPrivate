@@ -27,4 +27,18 @@ async def start(c: Client , m: Message):
             return  
 
 
+@app.on_message(filters.regex("راهنما") & filters.incoming & filters.private & ~filters.edited)
+async def add_paas(c: Client, m: Message):
+    id = m.from_user.id
+    cmd = m.text.split("_")[-1]
+    if cmd == "راهنما":
+        try:
+            if not id in x:
+                vf = await verifys(c, m) 
+            else:
+                await m.reply(help, quote=True) 
+        except Exception as e:
+            return 
+
+
 
