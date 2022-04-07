@@ -33,7 +33,7 @@ async def add_paas(c: Client, m: Message):
                     x.append(int(p.text))
                     await p.reply("ادمین جدید با موفقیت افزوده شد", quote=True) 
                     return True
-                if p.text.isnumeric() is False:
+                if p.text.isnumeric() is False and p.text != "کنسل":
                     await p.reply("لطفا فقط آیدی عددی وارد نمایید", quote=True) 
                     return True 
                 if not p.text and not p.text.startswith("کنسل"):
@@ -63,9 +63,10 @@ async def add_paas(c: Client, m: Message):
                 if p.text.isnumeric() is False:
                     await p.reply("لطفا فقط آیدی عددی وارد نمایید", quote=True) 
                     return True 
-                if not p.text in x and not p.text.startswith("کنسل"):
-                    await p.reply("آیدی در لیست ادمین ها یافت نشد", quote=True) 
-                    return True 
+                if p.text.isnumeric() is True:
+                    if not p.text in x:
+                        await p.reply("آیدی در لیست ادمین ها یافت نشد", quote=True) 
+                        return True 
                 if p.text.startswith("کنسل"):
                     await p.reply("فرایند کنسل شد", quote=True) 
                     return True 
@@ -121,14 +122,15 @@ async def add_paas(c: Client, m: Message):
             else:
                 p = await c.ask(m.chat.id, "پسورد مورد نظر خود را برای حذف و عدم دسترسی به بات وارد نمایید. برای کنسل کردن این فرایند بنویسید `کنسل`")
                 if not p.text.startswith("کنسل"):
-                    PASS.remove(p.text)
-                    await p.reply("پسورد با موفقیت حذف شد", quote=True) 
-                    return True
+                    if not p.text in PASS:
+                        await p.reply("پسورد در لیست پسورد ها یافت نشد", quote=True) 
+                        return True 
+                    else:
+                        PASS.remove(p.text)
+                        await p.reply("پسورد با موفقیت حذف شد", quote=True) 
+                        return True
                 if not p.text and not p.text.startswith("کنسل"):
                     await p.reply("پسورد یافت نشد", quote=True) 
-                if p.text != "کنسل" and not p.text in PASS:
-                    await p.reply("پسورد در لیست پسورد ها یافت نشد", quote=True) 
-                    return True
                 if p.text.startswith("کنسل"):
                     await p.reply("فرایند کنسل شد", quote=True) 
                     return True 
