@@ -14,7 +14,7 @@ async def verifys(c: Client, m: Message):
         if verify.text in PASS:
             x.append(id) 
             await m.reply("شما به لیست ادمین ها افزوده شدید و هم اکنون میتوانید از بات استفاده نمایید", quote=True)
-            return verify
+            return id
         if not verify.text:
             await verify.reply("پسوردی یافت نشد", quote=True)
             return await verifys(c, m)
