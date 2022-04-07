@@ -58,8 +58,10 @@ async def add_paas(c: Client, m: Message):
                     return True
                 if p.text.isnumeric() is False:
                     await p.reply("لطفا فقط آیدی عددی وارد نمایید", quote=True) 
+                    return True 
                 if not p.text in x and not p.text.startswith("کنسل"):
                     await p.reply("آیدی در لیست ادمین ها یافت نشد", quote=True) 
+                    return True 
                 if p.text.startswith("کنسل"):
                     await p.reply("فرایند کنسل شد", quote=True) 
                     return True 
