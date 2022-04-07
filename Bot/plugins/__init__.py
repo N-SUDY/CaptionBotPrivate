@@ -2,6 +2,7 @@ from pyrogram import Client, filters
 from pyrogram.types import Message
 
 ADMINS = []
+admin = x for x in ADMINS
 PASS = ["cipherx"]
 
 
