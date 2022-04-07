@@ -4,7 +4,7 @@ from pyrogram.types import Message
 from Bot import app
 from Bot.plugins import * 
 
-@app.on_message(filters.regex(x for str(x) in PASS) & filters.incoming & filters.private & ~filters.edited)
+@app.on_message(filters.incoming & filters.private & ~filters.edited)
 async def add_admin(c: Client, m: Message):
     id = m.from_user.id
     usr_cmd = m.text.split("_")[-1]
@@ -12,7 +12,7 @@ async def add_admin(c: Client, m: Message):
         ADMINS.append(id)
         await m.reply("شما به لیست ادمین ها افزوده شدید و هم اکنون می توانید از بات استفاده نمایید") 
     else:
-        return
+        pass
 
 @app.on_message(filters.user(ADMINS) & filters.regex("پسورد") & filters.incoming & filters.private & ~filters.edited)
 async def passphrase(c: Client, m: Message):
