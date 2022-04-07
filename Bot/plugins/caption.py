@@ -1,5 +1,3 @@
-from pyromod import listen  
-
 from pyrogram import Client, filters
 from pyrogram.types import Message
 
