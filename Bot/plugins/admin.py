@@ -32,6 +32,7 @@ async def add_channel(c: Client, m: Message):
                 if not p.text.startswith("کنسل") and p.text.startswith("-100"):
                     list1.append((await app.get_chat(int(p.text))).title)
                     list2.append(int(p.text))
+                    dic = dict(zip(list1, list2)) 
                     await p.reply("چنل جدید با موفقیت افزوده شد", quote=True) 
                     return True
                 if not p.text.startswith("-100") and p.text != "کنسل":
