@@ -40,7 +40,7 @@ async def help(c: Client, m: Message):
             else:
                 await m.reply(help, quote=True) 
         except Exception as e:
-            return 
-
+            #return 
+            print(str(e)) 
 
 
