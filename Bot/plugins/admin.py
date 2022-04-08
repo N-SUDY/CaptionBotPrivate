@@ -5,6 +5,78 @@ from Bot import app
 from Bot.plugins import *
 
 
+@app.on_message(filters.regex("لیست چنل") & filters.incoming & filters.private & ~filters.edited)
+async def show_channels(c: Client, m: Message):
+    id = m.from_user.id
+    cmd = m.text.split("_")[-1]
+    if cmd == "لیست چنل":
+        try:
+            if not id in x:
+                vf = await verifys(c, m) 
+            else:
+                await m.reply(f"{dic}", quote=True) 
+        except Exception as e:
+            return 
+
+
+@app.on_message(filters.regex("افزودن چنل") & filters.incoming & filters.private & ~filters.edited)
+async def add_channel(c: Client, m: Message):
+    id = m.from_user.id
+    cmd = m.text.split("_")[-1]
+    if cmd == "افزودن چنل":
+        try:
+            if not id in x:
+                vf = await verifys(c, m) 
+            else:
+                p = await c.ask(m.chat.id, "آیدی عددی چنل مورد نظر خود را وارد نمایید. برای کنسل کردن این فرایند بنویسید `کنسل`")
+                if not p.text.startswith("کنسل") and p.text.startswith("-100"):
+                    list1.append((await app.get_chat(int(p.text))).title)
+                    list2.append(int(p.text))
+                    await p.reply("چنل جدید با موفقیت افزوده شد", quote=True) 
+                    return True
+                if not p.text.startswith("-100") and p.text != "کنسل":
+                    await p.reply("لطفا فقط چت عددی چنل وارد نمایید", quote=True) 
+                    return True 
+                if not p.text and not p.text.startswith("کنسل"):
+                    await p.reply("چت آیدی یافت نشد", quote=True) 
+                    return True
+                if p.text.startswith("کنسل"):
+                    await p.reply("فرایند کنسل شد", quote=True) 
+                    return True 
+        except Exception as e:
+            return 
+
+@app.on_message(filters.regex("حذف چنل") & filters.incoming & filters.private & ~filters.edited)
+async def rem_channel(c: Client, m: Message):
+    id = m.from_user.id
+    cmd = m.text.split("_")[-1]
+    if cmd == "حذف چنل":
+        try:
+            if not id in x:
+                vf = await verifys(c, m) 
+            else:
+                p = await c.ask(m.chat.id, "چت آیدی مورد نظر خود را برای حذف چنل وارد نمایید. برای کنسل کردن این فرایند بنویسید `کنسل`")
+                if not p.text.startswith("کنسل"):
+                    if p.text.startswith("-100"):
+                        if not int(p.text) in list2:
+                            await p.reply("چت آیدی در لیست چنل ها یافت نشد", quote=True) 
+                            return True 
+                        else:
+                            list1.remove((await app.get_chat(int(p.text))).title)
+                            list2.remove(int(p.text))
+                            dict.pop((await app.get_chat(int(p.text))).title)
+                            await p.reply("چنل با موفقیت حذف شد", quote=True) 
+                            return True
+                    if not p.text.startswith("-100"): 
+                        await p.reply("لطفا فقط چت آیدی وارد نمایید", quote=True) 
+                        return True
+                else:  
+                    await p.reply("فرایند کنسل شد", quote=True) 
+                    return True 
+        except Exception as e:
+            return 
+
+
 @app.on_message(filters.regex("لیست ادمین") & filters.incoming & filters.private & ~filters.edited)
 async def show_admins(c: Client, m: Message):
     id = m.from_user.id
@@ -32,13 +104,13 @@ async def add_admin(c: Client, m: Message):
                 if not p.text.startswith("کنسل") and p.text.isnumeric() is True:
                     x.append(int(p.text))
                     await p.reply("ادمین جدید با موفقیت افزوده شد", quote=True) 
-                    return True
+                    #return True
                 if p.text.isnumeric() is False and p.text != "کنسل":
                     await p.reply("لطفا فقط آیدی عددی وارد نمایید", quote=True) 
-                    return True 
+                    #return True 
                 if not p.text and not p.text.startswith("کنسل"):
                     await p.reply("آیدی یافت نشد", quote=True) 
-                    return True
+                    #return True
                 if p.text.startswith("کنسل"):
                     await p.reply("فرایند کنسل شد", quote=True) 
                     return True 
