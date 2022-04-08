@@ -1,5 +1,6 @@
 from pyrogram import Client, filters
 from pyrogram.types import Message
+from pyrogram.errors.exceptions.bad_request_400 import ChannelInvalid
 
 from Bot import app
 from Bot.plugins import *
@@ -38,17 +39,17 @@ async def add_channel(c: Client, m: Message):
             else:
                 p = await c.ask(m.chat.id, "آیدی عددی چنل مورد نظر خود را وارد نمایید. برای کنسل کردن این فرایند بنویسید `کنسل`")
                 if not p.text.startswith("کنسل") and p.text.startswith("-100"):
-                    list1.append((await app.get_chat(int(p.text))).title)
-                    list2.append(int(p.text))
-                    await chad(c, m) 
-                    await p.reply("چنل جدید با موفقیت افزوده شد", quote=True) 
-                    return True
+                    try:
+                        list1.append((await app.get_chat(int(p.text))).title)
+                        list2.append(int(p.text))
+                        await chad(c, m) 
+                        await p.reply("چنل جدید با موفقیت افزوده شد", quote=True) 
+                    except ChannelInvalid:
+                        await p.reply("ابتدا بات را در چنل ادمین کرده و سپس چت آیدی آن را بفرستید", quote=True)
                 if not p.text.startswith("-100") and p.text != "کنسل":
-                    await p.reply("لطفا فقط چت عددی چنل وارد نمایید", quote=True) 
-                    return True 
+                    await p.reply("لطفا فقط چت عددی چنل وارد نمایید", quote=True)  
                 if not p.text and not p.text.startswith("کنسل"):
                     await p.reply("چت آیدی یافت نشد", quote=True) 
-                    return True
                 if p.text.startswith("کنسل"):
                     await p.reply("فرایند کنسل شد", quote=True) 
                     return True 
@@ -68,8 +69,7 @@ async def rem_channel(c: Client, m: Message):
                 if not p.text.startswith("کنسل"):
                     if p.text.startswith("-100"):
                         if not int(p.text) in list2:
-                            await p.reply("چت آیدی در لیست چنل ها یافت نشد", quote=True) 
-                            return True 
+                            await p.reply("چت آیدی در لیست چنل ها یافت نشد", quote=True)  
                         else:
                             await chad(c, m) 
                             list1.remove((await app.get_chat(int(p.text))).title)
@@ -78,7 +78,6 @@ async def rem_channel(c: Client, m: Message):
                             await m.reply("چنل با موفقیت حذف شد", quote=True) 
                     if not p.text.startswith("-100"): 
                         await p.reply("لطفا فقط چت آیدی وارد نمایید", quote=True) 
-                        return True
                 else:  
                     await p.reply("فرایند کنسل شد", quote=True) 
                     return True 
