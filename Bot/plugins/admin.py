@@ -75,7 +75,7 @@ async def rem_channel(c: Client, m: Message):
                             list1.remove((await app.get_chat(int(p.text))).title)
                             list2.remove(int(p.text))
                             dict.pop((await app.get_chat(int(p.text))).title)
-                            await p.reply("چنل با موفقیت حذف شد", quote=True) 
+                            await m.reply("چنل با موفقیت حذف شد", quote=True) 
                     if not p.text.startswith("-100"): 
                         await p.reply("لطفا فقط چت آیدی وارد نمایید", quote=True) 
                         return True
