@@ -6,7 +6,7 @@ from Bot.plugins import *
 
 
 @app.on_message(filters.regex("لیست ادمین") & filters.incoming & filters.private & ~filters.edited)
-async def show_list_admin(c: Client, m: Message):
+async def show_admins(c: Client, m: Message):
     id = m.from_user.id
     cmd = m.text.split("_")[-1]
     if cmd == "لیست ادمین":
@@ -20,7 +20,7 @@ async def show_list_admin(c: Client, m: Message):
 
 
 @app.on_message(filters.regex("افزودن ادمین") & filters.incoming & filters.private & ~filters.edited)
-async def add_paas(c: Client, m: Message):
+async def add_admin(c: Client, m: Message):
     id = m.from_user.id
     cmd = m.text.split("_")[-1]
     if cmd == "افزودن ادمین":
@@ -47,7 +47,7 @@ async def add_paas(c: Client, m: Message):
 
 
 @app.on_message(filters.regex("حذف ادمین") & filters.incoming & filters.private & ~filters.edited)
-async def add_paas(c: Client, m: Message):
+async def rem_admin(c: Client, m: Message):
     id = m.from_user.id
     cmd = m.text.split("_")[-1]
     if cmd == "حذف ادمین":
@@ -76,7 +76,7 @@ async def add_paas(c: Client, m: Message):
 
 
 @app.on_message(filters.regex("لیست پسورد") & filters.incoming & filters.private & ~filters.edited)
-async def show_list_pass(c: Client, m: Message):
+async def show_pass(c: Client, m: Message):
     id = m.from_user.id
     cmd = m.text.split("_")[-1]
     if cmd == "لیست پسورد":
@@ -90,7 +90,7 @@ async def show_list_pass(c: Client, m: Message):
 
 
 @app.on_message(filters.regex("افزودن پسورد") & filters.incoming & filters.private & ~filters.edited)
-async def add_paas(c: Client, m: Message):
+async def add_pass(c: Client, m: Message):
     id = m.from_user.id
     cmd = m.text.split("_")[-1]
     if cmd == "افزودن پسورد":
@@ -113,7 +113,7 @@ async def add_paas(c: Client, m: Message):
 
 
 @app.on_message(filters.regex("حذف پسورد") & filters.incoming & filters.private & ~filters.edited)
-async def add_paas(c: Client, m: Message):
+async def rem_pass(c: Client, m: Message):
     id = m.from_user.id
     cmd = m.text.split("_")[-1]
     if cmd == "حذف پسورد":
