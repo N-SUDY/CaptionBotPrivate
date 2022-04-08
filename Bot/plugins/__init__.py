@@ -35,3 +35,9 @@ async def verifys(c: Client, m: Message):
             return True
     else:
         pass
+
+
+async def chad(c: Client, m: Message):
+    if list1 and list2: 
+        dic = dict(zip(list1, list2))
+        return dic
