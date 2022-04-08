@@ -22,7 +22,8 @@ async def send(c: Client, m: Message):
                 await chat.reply(f"پست مورد نظر با موفقیت به چنل {(await app.get_chat(int(chat.text))).title} افزوده شد", quote=True)
             else:
                 await chat.reply("لطفا چت آیدی صحیح را وارد نمایید", quote=True) 
-
+        else:
+            await c.send_message(m.chat.id, "شما بر روی فایل مورد نظر خود ریپلای نکردید")
 
 @app.on_message(filters.regex("لیست چنل") & filters.incoming & filters.private & ~filters.edited)
 async def show_channels(c: Client, m: Message):
@@ -86,7 +87,7 @@ async def rem_channel(c: Client, m: Message):
                             list1.remove((await app.get_chat(int(p.text))).title)
                             list2.remove(int(p.text))
                             dict.pop((await app.get_chat(int(p.text))).title)
-                            await m.reply("چنل با موفقیت حذف شد", quote=True) 
+                            await c.send_message(m.chat.id, "چنل با موفقیت حذف شد") 
                     if not p.text.startswith("-100"): 
                         await p.reply("لطفا فقط چت آیدی وارد نمایید", quote=True) 
                 else:  
