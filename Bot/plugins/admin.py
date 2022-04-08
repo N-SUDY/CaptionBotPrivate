@@ -21,7 +21,8 @@ async def show_channels(c: Client, m: Message):
             if not id in x:
                 vf = await verifys(c, m) 
             else:
-                await m.reply(f"{dic}", quote=True) 
+                mad = await chad(c, m) 
+                await m.reply(f"{mad}", quote=True) 
         except Exception as e:
             return 
 
@@ -39,6 +40,7 @@ async def add_channel(c: Client, m: Message):
                 if not p.text.startswith("کنسل") and p.text.startswith("-100"):
                     list1.append((await app.get_chat(int(p.text))).title)
                     list2.append(int(p.text))
+                    await chad(c, m) 
                     await p.reply("چنل جدید با موفقیت افزوده شد", quote=True) 
                     return True
                 if not p.text.startswith("-100") and p.text != "کنسل":
@@ -69,6 +71,7 @@ async def rem_channel(c: Client, m: Message):
                             await p.reply("چت آیدی در لیست چنل ها یافت نشد", quote=True) 
                             return True 
                         else:
+                            await chad(c, m) 
                             list1.remove((await app.get_chat(int(p.text))).title)
                             list2.remove(int(p.text))
                             dict.pop((await app.get_chat(int(p.text))).title)
