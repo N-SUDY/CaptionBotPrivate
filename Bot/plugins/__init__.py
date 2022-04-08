@@ -2,7 +2,8 @@ from pyrogram import Client, filters
 from pyrogram.types import Message 
 
 x = []
-
+list1 = [] 
+list2 = [] 
 PASS = ["ok"]
 
 help = """
