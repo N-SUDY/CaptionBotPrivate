@@ -29,11 +29,11 @@ async def start(c: Client , m: Message):
             return  
 
 
-@app.on_message(filters.regex("راهنما") & filters.incoming & filters.private & ~filters.edited)
+@app.on_message(filters.regex("منو") & filters.incoming & filters.private & ~filters.edited)
 async def help(c: Client, m: Message):
     id = m.from_user.id
     cmd = m.text.split("_")[-1]
-    if cmd == "راهنما":
+    if cmd == "منو":
         try:
             if not id in x:
                 vf = await verifys(c, m) 
