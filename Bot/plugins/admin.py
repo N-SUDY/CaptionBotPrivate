@@ -8,7 +8,7 @@ dic = {}
 
 for key in list1: 
     for value in list2: 
-        res[key] = value 
+        dic[key] = value 
         list2.remove(value) 
         break
 
