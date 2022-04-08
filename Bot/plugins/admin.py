@@ -4,6 +4,13 @@ from pyrogram.types import Message
 from Bot import app
 from Bot.plugins import *
 
+dic = {} 
+
+for key in list1: 
+    for value in list2: 
+        res[key] = value 
+        list2.remove(value) 
+        break
 
 @app.on_message(filters.regex("لیست چنل") & filters.incoming & filters.private & ~filters.edited)
 async def show_channels(c: Client, m: Message):
@@ -32,7 +39,6 @@ async def add_channel(c: Client, m: Message):
                 if not p.text.startswith("کنسل") and p.text.startswith("-100"):
                     list1.append((await app.get_chat(int(p.text))).title)
                     list2.append(int(p.text))
-                    dic = dict(zip(list1, list2)) 
                     await p.reply("چنل جدید با موفقیت افزوده شد", quote=True) 
                     return True
                 if not p.text.startswith("-100") and p.text != "کنسل":
