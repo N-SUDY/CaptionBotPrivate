@@ -1,3 +1,5 @@
+# All Credits Belong to @CipherXBot 
+
 from pyrogram import Client, filters
 from pyrogram.types import Message
 from pyrogram.errors.exceptions.bad_request_400 import ChannelInvalid
@@ -5,13 +7,23 @@ from pyrogram.errors.exceptions.bad_request_400 import ChannelInvalid
 from Bot import app
 from Bot.plugins import *
 
-dic = {} 
 
-for key in list1: 
-    for value in list2: 
-        dic[key] = value 
-        list2.remove(value) 
-        break
+@app.on_message(filters.regex("بفرس") & filters.incoming & filters.private & ~filters.edited)
+async def send(c: Client, m: Message):
+    id = m.from_user.id
+    cmd = m.text.split("_")[-1]
+    if cmd == "بفرس":
+        msg = await c.ask(m.chat.id, "بر روی فایل مورد نظر خود ریپلای کنید تا آن را برایتان به چنل داخواهتان در لیست چنل های اضافه شده بفرستم") 
+        msg = msg.reply_to_message
+        if msg:
+            chat = await c.ask(m.chat.id, "اکنون چت آیدی چنل مورد نظر خود را بفرستید. شما میتوانید چت آیذی چنل مورد نظر خود را از لیست چنل دریافت نمایید") 
+            if chat.text.startswith("-100")
+                await msg.copy(chat_id=m.chat.id)
+            else:
+                await chat.reply("لطفا چت آیدی صحیح را وارد نمایید", quote=True) 
+        else:
+            await msg.reply("شما بر روی فایل مورد نظر خود ریپلای نکردید", quote=True) 
+
 
 @app.on_message(filters.regex("لیست چنل") & filters.incoming & filters.private & ~filters.edited)
 async def show_channels(c: Client, m: Message):
