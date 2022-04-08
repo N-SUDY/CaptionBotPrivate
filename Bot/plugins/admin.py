@@ -19,7 +19,7 @@ async def send(c: Client, m: Message):
             chat = await c.ask(m.chat.id, "اکنون چت آیدی چنل مورد نظر خود را بفرستید. شما میتوانید چت آیدی چنل مورد نظر خود را از لیست چنل دریافت نمایید") 
             if chat.text.startswith("-100"):
                 await msg.copy(chat_id=int(chat.text))
-                await chat.reply(f"پست مورد نظر با موفقیت به چنل {(await app.get_chat(int(chat.text))).title} افزوده شد", quote=True)
+                await chat.reply(f"پست مورد نظر با موفقیت به چنل {(await app.get_chat(int(chat.text))).title} ارسال شد", quote=True)
             else:
                 await chat.reply("لطفا چت آیدی صحیح را وارد نمایید", quote=True) 
         else:
@@ -86,8 +86,10 @@ async def rem_channel(c: Client, m: Message):
                             await chad(c, m) 
                             list1.remove((await app.get_chat(int(p.text))).title)
                             list2.remove(int(p.text))
-                            dict.pop((await app.get_chat(int(p.text))).title)
-                            await c.send_message(m.chat.id, "چنل با موفقیت حذف شد") 
+                            rm = dict.pop((await app.get_chat(int(p.text))).title)
+                            if rm is True:
+                                return 
+                            await p.reply("چنل با موفقیت حذف شد", quote=True) 
                     if not p.text.startswith("-100"): 
                         await p.reply("لطفا فقط چت آیدی وارد نمایید", quote=True) 
                 else:  
