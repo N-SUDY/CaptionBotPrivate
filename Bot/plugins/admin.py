@@ -19,10 +19,9 @@ async def send(c: Client, m: Message):
             chat = await c.ask(m.chat.id, "اکنون چت آیدی چنل مورد نظر خود را بفرستید. شما میتوانید چت آیدی چنل مورد نظر خود را از لیست چنل دریافت نمایید") 
             if chat.text.startswith("-100"):
                 await msg.copy(chat_id=int(chat.text))
+                await chat.reply(f"پست مورد نظر با موفقیت به چنل {(await app.get_chat(int(chat.text))).title} افزوده شد", quote=True)
             else:
                 await chat.reply("لطفا چت آیدی صحیح را وارد نمایید", quote=True) 
-        else:
-            await msg.reply("شما بر روی فایل مورد نظر خود ریپلای نکردید", quote=True) 
 
 
 @app.on_message(filters.regex("لیست چنل") & filters.incoming & filters.private & ~filters.edited)
