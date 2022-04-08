@@ -1,3 +1,5 @@
+# All Credits Belong to @CipherXBot
+
 from pyrogram import Client
 from pyromod import listen
 
