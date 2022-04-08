@@ -5,15 +5,6 @@ x = []
 list1 = [] 
 list2 = [] 
 PASS = ["ok"]
-dic = {} 
-
-for key in list1: 
-    for value in list2: 
-        dic[key] = value 
-        list2.remove(value) 
-        break
-
-#dic = dict(zip(list1, list2)) 
 
 help = """
 🎆 راهنمای بات :
