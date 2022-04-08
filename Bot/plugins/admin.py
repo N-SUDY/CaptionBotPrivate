@@ -17,7 +17,7 @@ async def send(c: Client, m: Message):
         msg = msg.reply_to_message
         if msg:
             chat = await c.ask(m.chat.id, "اکنون چت آیدی چنل مورد نظر خود را بفرستید. شما میتوانید چت آیذی چنل مورد نظر خود را از لیست چنل دریافت نمایید") 
-            if chat.text.startswith("-100")
+            if chat.text.startswith("-100"):
                 await msg.copy(chat_id=m.chat.id)
             else:
                 await chat.reply("لطفا چت آیدی صحیح را وارد نمایید", quote=True) 
