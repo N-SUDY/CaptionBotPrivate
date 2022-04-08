@@ -5,6 +5,7 @@ x = []
 list1 = [] 
 list2 = [] 
 PASS = ["ok"]
+dic = dict(zip(list1, list2)) 
 
 help = """
 🎆 راهنمای بات :
