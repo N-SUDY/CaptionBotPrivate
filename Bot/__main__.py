@@ -1,3 +1,5 @@
+# All Credits Belong to @CipherXBot
+
 import glob
 import asyncio
 import logging
@@ -13,9 +15,6 @@ from pyrogram import Client, errors, idle
 from Bot import app
 from Bot.config import Var
 
-DOWNLOAD_LOCATION = "./Downloads"
-
-StartTime = time.time()
 
 logging.basicConfig(
     level=logging.INFO,
@@ -23,10 +22,13 @@ logging.basicConfig(
 )
 logging.getLogger("pyrogram").setLevel(logging.ERROR)
 
+
 ppath = "Bot/plugins/*.py"
 files = glob.glob(ppath)
 
+
 loop = asyncio.get_event_loop()
+
 
 async def start_services():
     print('\n')
