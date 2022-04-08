@@ -7,16 +7,6 @@ from Bot import app
 from Bot.plugins import * 
 
 
-help = """
-🎆 راهنمای بات :
-✨ افزودن ادمین✨ حذف ادمین ✨ لیست ادمین 
-✨ افزودن پسورد ✨ حذف پسورد ✨ لیست پسورد
-✨ افزودن چنل ✨ حذف چنل ✨ لیست چنل 
-✨ بفرس
-⚜️ همچنین با فرستادن هر فایل به بات می توانید کپشن آن را ادیت کنید.
-"""
-
-
 @app.on_message(filters.command("start") & filters.incoming & filters.private & ~filters.edited)
 async def start(c: Client , m: Message):
     firstname = m.from_user.first_name
