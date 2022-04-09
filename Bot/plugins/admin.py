@@ -109,7 +109,10 @@ async def show_admins(c: Client, m: Message):
             if not id in x:
                 vf = await verifys(c, m) 
             else:
-                await m.reply(f"{x}", quote=True) 
+                if x == []:
+                    await m.reply("لیست ادمین خالی می باشد", quote=True) 
+                else:
+                    await m.reply(f"{x}", quote=True) 
         except Exception as e:
             return 
 
@@ -173,7 +176,10 @@ async def show_pass(c: Client, m: Message):
             if not id in x:
                 vf = await verifys(c, m) 
             else:
-                await m.reply(f"{PASS}", quote=True) 
+                if PASS == []:
+                    await m.reply("لیست پسورد خالی می باشد", quote=True) 
+                else:
+                    await m.reply(f"{PASS}", quote=True) 
         except Exception as e:
             return 
 
