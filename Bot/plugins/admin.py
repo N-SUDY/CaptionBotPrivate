@@ -35,9 +35,10 @@ async def show_channels(c: Client, m: Message):
                 vf = await verifys(c, m) 
             else:
                 mad = await chad(c, m) 
-                await m.reply(f"{mad}", quote=True) 
                 if mad == None:
                     await m.reply("لیست چنل خالی می باشد", quote=True) 
+                else:
+                    await m.reply(f"{mad}", quote=True)  
         except Exception as e:
             return 
 
