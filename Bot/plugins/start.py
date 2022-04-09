@@ -43,4 +43,3 @@ async def help(c: Client, m: Message):
         except Exception as e:
             return
 
-
