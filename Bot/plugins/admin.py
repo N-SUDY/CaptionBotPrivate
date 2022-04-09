@@ -61,11 +61,11 @@ async def add_channel(c: Client, m: Message):
                         await p.reply("چنل جدید با موفقیت افزوده شد", quote=True) 
                     except ChannelInvalid:
                         await p.reply("ابتدا بات را در چنل ادمین کرده و سپس چت آیدی آن را بفرستید", quote=True)
-                if not p.text.startswith("-100") and p.text != "کنسل":
+                elif not p.text.startswith("-100") and p.text != "کنسل":
                     await p.reply("لطفا فقط چت عددی چنل وارد نمایید", quote=True)  
-                if not p.text and not p.text.startswith("کنسل"):
+                elif not p.text and not p.text.startswith("کنسل"):
                     await p.reply("چت آیدی یافت نشد", quote=True) 
-                if p.text.startswith("کنسل"):
+                elif p.text.startswith("کنسل"):
                     await p.reply("فرایند کنسل شد", quote=True) 
                     return True 
         except Exception as e:
@@ -91,7 +91,7 @@ async def rem_channel(c: Client, m: Message):
                             list1.remove((await app.get_chat(int(p.text))).title)
                             list2.remove(int(p.text))
                             rm = dict.pop((await app.get_chat(int(p.text))).title)
-                    if not p.text.startswith("-100"): 
+                    elif not p.text.startswith("-100"): 
                         await p.reply("لطفا فقط چت آیدی وارد نمایید", quote=True) 
                 else:  
                     await p.reply("فرایند کنسل شد", quote=True) 
@@ -130,11 +130,11 @@ async def add_admin(c: Client, m: Message):
                 if not p.text.startswith("کنسل") and p.text.isnumeric() is True:
                     x.append(int(p.text))
                     await p.reply("ادمین جدید با موفقیت افزوده شد", quote=True) 
-                if p.text.isnumeric() is False and p.text != "کنسل":
+                elif p.text.isnumeric() is False and p.text != "کنسل":
                     await p.reply("لطفا فقط آیدی عددی وارد نمایید", quote=True) 
-                if not p.text and not p.text.startswith("کنسل"):
+                elif not p.text and not p.text.startswith("کنسل"):
                     await p.reply("آیدی یافت نشد", quote=True) 
-                if p.text.startswith("کنسل"):
+                elif p.text.startswith("کنسل"):
                     await p.reply("فرایند کنسل شد", quote=True) 
                     return True 
         except Exception as e:
@@ -158,7 +158,7 @@ async def rem_admin(c: Client, m: Message):
                         else:
                             x.remove(int(p.text))
                             await p.reply("ادمین با موفقیت حذف شد", quote=True) 
-                    if p.text.isnumeric() is False: 
+                    elif p.text.isnumeric() is False: 
                         await p.reply("لطفا فقط آیدی عددی وارد نمایید", quote=True) 
                 else:  
                     await p.reply("فرایند کنسل شد", quote=True) 
@@ -197,9 +197,9 @@ async def add_pass(c: Client, m: Message):
                 if not p.text.startswith("کنسل"):
                     PASS.append(p.text)
                     await p.reply("پسورد جدید با موفقیت افزوده شد", quote=True) 
-                if not p.text:
+                elif not p.text:
                     await p.reply("پسوردی یافت نشد", quote=True) 
-                if p.text.startswith("کنسل"): 
+                elif p.text.startswith("کنسل"): 
                     await p.reply("فرایند کنسل شد", quote=True) 
                     return True 
         except Exception as e:
@@ -222,9 +222,9 @@ async def rem_pass(c: Client, m: Message):
                     else:
                         PASS.remove(p.text)
                         await p.reply("پسورد با موفقیت حذف شد", quote=True) 
-                if not p.text and not p.text.startswith("کنسل"):
+                elif not p.text and not p.text.startswith("کنسل"):
                     await p.reply("پسورد یافت نشد", quote=True) 
-                if p.text.startswith("کنسل"):
+                elif p.text.startswith("کنسل"):
                     await p.reply("فرایند کنسل شد", quote=True) 
                     return True 
         except Exception as e:
