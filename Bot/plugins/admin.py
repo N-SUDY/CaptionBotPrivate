@@ -7,6 +7,16 @@ from pyrogram.errors.exceptions.bad_request_400 import ChannelInvalid
 from Bot import app
 from Bot.plugins import *
 
+@app.on_message(filters.regex("آیدی") & filters.incoming & (filters.channel | filters.group))
+async def send(c: Client, m: Message):
+    id = m.from_user.id
+    cmd = m.text.split("_")[-1]
+    if cmd == "آیدی":
+        try:
+            if not id in x:
+                vf = await verifys(c, m) 
+            else:
+                await m.reply(f"آیدی عددی : `{m.chat.id}`") 
 
 @app.on_message(filters.regex("بفرس") & filters.incoming & filters.private & ~filters.edited)
 async def send(c: Client, m: Message):
