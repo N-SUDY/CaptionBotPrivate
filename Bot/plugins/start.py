@@ -39,7 +39,7 @@ async def help(c: Client, m: Message):
             if not id in x:
                 vf = await verifys(c, m) 
             else:
-                await m.reply("〄 راهنمای بات 〄\n✓ افزودن چنل\n✓ بفرس\n〄 همچنین با فرستادن هر فایل به بات می توانید کپشن آن را ادیت کنید.", quote=True) 
+                await m.reply("〄 راهنمای بات 〄\n✓ افزودن چنل\n✓ بفرس\n✓ آیدی\n〄 همچنین با فرستادن هر فایل به بات می توانید کپشن آن را ادیت کنید.", quote=True) 
         except Exception as e:
             return
 
