@@ -17,6 +17,8 @@ async def send(c: Client, m: Message):
                 vf = await verifys(c, m) 
             else:
                 await m.reply(f"آیدی عددی : `{m.chat.id}`") 
+        except Exception:
+            return
 
 @app.on_message(filters.regex("بفرس") & filters.incoming & filters.private & ~filters.edited)
 async def send(c: Client, m: Message):
