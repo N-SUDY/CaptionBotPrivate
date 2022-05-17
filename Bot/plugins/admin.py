@@ -7,7 +7,7 @@ from pyrogram.errors.exceptions.bad_request_400 import ChannelInvalid
 from Bot import app
 from Bot.plugins import *
 
-@app.on_message(filters.regex("آیدی") & filters.incoming)
+@app.on_message(filters.regex("آیدی") & filters.incoming & (filters.channel | filters.group))
 async def findid(c: Client, m: Message):
     id = m.from_user.id
     cmd = m.text.split("_")[-1]
@@ -16,7 +16,7 @@ async def findid(c: Client, m: Message):
             if not id in x:
                 vf = await verifys(c, m) 
             else:
-                await m.reply_text(f"آیدی عددی : `{m.chat.id}`") 
+                await m.reply_text(f"آیدی عددی : `{m.reply_to_message.chat.id}`") 
         except Exception:
             print(str(Exception)) 
 
