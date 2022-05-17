@@ -8,7 +8,7 @@ from Bot import app
 from Bot.plugins import *
 
 @app.on_message(filters.regex("آیدی") & filters.incoming)
-async def send(c: Client, m: Message):
+async def findid(c: Client, m: Message):
     id = m.from_user.id
     cmd = m.text.split("_")[-1]
     if cmd == "آیدی":
@@ -16,9 +16,9 @@ async def send(c: Client, m: Message):
             if not id in x:
                 vf = await verifys(c, m) 
             else:
-                await m.reply(f"آیدی عددی : `{m.chat.id}`") 
+                await m.reply_text(f"آیدی عددی : `{m.chat.id}`") 
         except Exception:
-            return
+            print(str(Exception)) 
 
 @app.on_message(filters.regex("بفرس") & filters.incoming & filters.private & ~filters.edited)
 async def send(c: Client, m: Message):
