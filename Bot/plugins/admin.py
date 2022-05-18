@@ -7,7 +7,7 @@ from pyrogram.errors.exceptions.bad_request_400 import ChannelInvalid
 from Bot import app
 from Bot.plugins import *
 
-@app.on_message(filters.regex("آیدی") & filters.incoming & (filters.channel | filters.group) & ~filters.edited)
+@app.on_message(filters.regex("آیدی") & (filters.channel | filters.group) & ~filters.edited)
 async def findid(c: Client, m: Message):
     id = m.from_user.id
     cmd = m.text.split("_")[-1]
