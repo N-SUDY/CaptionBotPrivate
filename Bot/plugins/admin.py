@@ -12,6 +12,7 @@ async def findid(c: Client, m: Message):
     id = m.from_user.id
     cmd = m.text.split("_")[-1]
     if cmd == "آیدی":
+        print("ok") 
         await m.reply_text(f"آیدی عددی : `{m.reply_to_message.chat.id}`") 
         return 
 
