@@ -12,13 +12,8 @@ async def findid(c: Client, m: Message):
     id = m.from_user.id
     cmd = m.text.split("_")[-1]
     if cmd == "آیدی":
-        try:
-            if not id in x:
-                vf = await verifys(c, m) 
-            else:
-                await m.reply_text(f"آیدی عددی : `{m.reply_to_message.chat.id}`") 
-        except Exception:
-            print(str(Exception)) 
+        await m.reply_text(f"آیدی عددی : `{m.reply_to_message.chat.id}`") 
+        return 
 
 @app.on_message(filters.regex("بفرس") & filters.incoming & filters.private & ~filters.edited)
 async def send(c: Client, m: Message):
