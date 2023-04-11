@@ -27,10 +27,10 @@ async def send(c: Client, m: Message):
     id = m.from_user.id
     cmd = m.text.split("_")[-1]
     if cmd == "بفرس":
-        msg = await c.ask(m.chat.id, "بر روی فایل مورد نظر خود ریپلای کنید تا آن را برایتان به چنل داخواهتان در لیست چنل های اضافه شده بفرستم") 
+        msg = await m.chat.ask("بر روی فایل مورد نظر خود ریپلای کنید تا آن را برایتان به چنل داخواهتان در لیست چنل های اضافه شده بفرستم") 
         msg = msg.reply_to_message
         if msg:
-            chat = await c.ask(m.chat.id, "اکنون چت آیدی چنل مورد نظر خود را بفرستید. شما میتوانید چت آیدی چنل مورد نظر خود را از لیست چنل دریافت نمایید") 
+            chat = await m.chat.ask("اکنون چت آیدی چنل مورد نظر خود را بفرستید. شما میتوانید چت آیدی چنل مورد نظر خود را از لیست چنل دریافت نمایید") 
             if chat.text.startswith("-100"):
                 await msg.copy(chat_id=int(chat.text))
                 await chat.reply(f"پست مورد نظر با موفقیت به چنل {(await app.get_chat(int(chat.text))).title} ارسال شد", quote=True)
