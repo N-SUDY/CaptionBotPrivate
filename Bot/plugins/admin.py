@@ -8,19 +8,19 @@ from Bot import app
 from Bot.plugins import *
 
 
-@app.on_message(filters.command("id"))
-async def id_command(c: Client, m: Message):
-    try:
-        chat = await c.get_chat(m.text.split()[1])
-        await c.send_message(
-            chat_id=m.chat.id,
-            text=f"{chat.title} ID is: {chat.id}"
-        )
-    except Exception:
-        await c.send_message(
-            chat_id=m.chat.id,
-            text="یوزرنیم/لینکی که فرستادید معتبر نمی باشد"
-        )
+#@app.on_message(filters.command("id"))
+#async def id_command(c: Client, m: Message):
+#    try:
+#        chat = await c.get_chat(m.text.split()[1])
+#        await c.send_message(
+#            chat_id=m.chat.id,
+#            text=f"{chat.title} ID is: {chat.id}"
+#        )
+#    except Exception:
+#        await c.send_message(
+#            chat_id=m.chat.id,
+#            text="یوزرنیم/لینکی که فرستادید معتبر نمی باشد"
+#        )
       
 @app.on_message(filters.regex("بفرس") & filters.incoming & filters.private)
 async def send(c: Client, m: Message):
