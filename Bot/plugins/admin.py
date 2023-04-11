@@ -40,19 +40,19 @@ async def send(c: Client, m: Message):
             await c.send_message(m.chat.id, "شما بر روی فایل مورد نظر خود ریپلای نکردید")
 
 @app.on_message(filters.regex("لیست چنل") & filters.incoming & filters.private)
-async def show_channels(c: Client, message):
-    id = message.from_user.id
-    cmd = message.text.split("_")[-1]
+async def show_channels(c: Client, m: Message):
+    id = m.from_user.id
+    cmd = m.text.split("_")[-1]
     if cmd == "لیست چنل":
         try:
             if not id in x:
-                vf = await verifys(c, message) 
+                vf = await verifys(c, m) 
             else:
-                mad = await chad(c, message) 
+                mad = await chad(c, m) 
                 if mad == None:
-                    await message.reply("لیست چنل خالی می باشد", quote=True) 
+                    await m.reply("لیست چنل خالی می باشد", quote=True) 
                 else:
-                    await message.reply(f"{mad}", quote=True)  
+                    await m.reply(f"{mad}", quote=True)  
         except Exception as e:
             return 
 
