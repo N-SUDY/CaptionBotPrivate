@@ -6,7 +6,7 @@ from pyromod import listen
 from Bot.config import Var
 
 app = Client(
-    session_name='Caption',
+    "Caption",
     api_id=Var.API_ID,
     api_hash=Var.API_HASH,
     bot_token=Var.BOT_TOKEN,
