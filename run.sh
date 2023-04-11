@@ -17,8 +17,8 @@ done
 echo -e "\e[1;32mInstalling Dependencies ---------------------------\e[0m\n" 
 apt-get update
 apt-get upgrade -y
-pkg upgrade -y
-pkg install python wget -y
+apt upgrade -y
+apt install python wget -y
 pip3 install --no-cache-dir -U -r requirements.txt
 clear
 python3 -m Bot
