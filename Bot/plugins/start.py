@@ -7,7 +7,7 @@ from Bot import app
 from Bot.plugins import * 
 
 
-@app.on_message(filters.command("start") & filters.incoming & filters.private & ~filters.edited)
+@app.on_message(filters.command("start") & filters.incoming & filters.private)
 async def start(c: Client , m: Message):
     firstname = m.from_user.first_name
     id = m.from_user.id
@@ -30,7 +30,7 @@ async def start(c: Client , m: Message):
             return  
 
 
-@app.on_message(filters.regex("راهنما") & filters.incoming & filters.private & ~filters.edited)
+@app.on_message(filters.regex("راهنما") & filters.incoming & filters.private)
 async def help(c: Client, m: Message):
     id = m.from_user.id
     cmd = m.text.split("_")[-1]
@@ -39,7 +39,7 @@ async def help(c: Client, m: Message):
             if not id in x:
                 vf = await verifys(c, m) 
             else:
-                await m.reply("〄 راهنمای بات 〄\n✓ افزودن چنل\n✓ بفرس\n✓ آیدی\n〄 همچنین با فرستادن هر فایل به بات می توانید کپشن آن را ادیت کنید.", quote=True) 
+                await m.reply("〄 راهنمای بات 〄\n✓ افزودن چنل\n✓ id دریافت آیدی\n✓ بفرس\n✓ آیدی\n〄 همچنین با فرستادن هر فایل به بات می توانید کپشن آن را ادیت کنید.", quote=True) 
         except Exception as e:
             return
 
