@@ -56,7 +56,7 @@ async def start_services():
             spec.loader.exec_module(load)
             sys.modules["Bot.plugins." + plugin_name] = load
             logging.info("Imported => " + plugin_name)
-            logging.info('----------- Caption Bot is Ready to Use ------------')
+    logging.info('----------- Caption Bot is Ready to Use ------------')
     await idle()
     
     
