@@ -33,7 +33,7 @@ loop = asyncio.get_event_loop()
 async def start_services():
     print('\n')
     print('------------------- Initalizing Caption Bot -------------------')
-    await app.start()
+    await app.run()
     print('----------------------------- DONE -----------------------------')
     print('\n')
     print('--------------------------- Importing ---------------------------')
