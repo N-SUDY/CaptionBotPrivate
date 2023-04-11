@@ -7,6 +7,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class Var(object):
-    API_ID = int(getenv('API_ID'))
-    API_HASH = str(getenv('API_HASH'))
+    API_ID = 6
+    API_HASH = "eb06d4abfb49dc3eeb1aeb98ae0f581e"
     BOT_TOKEN = str(getenv('BOT_TOKEN'))
