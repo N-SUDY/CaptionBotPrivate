@@ -15,7 +15,7 @@ async def id_command(c: Client, m: Message):
     if cmd == "آیدی":
         try:
             x = await m.chat.ask("یوزرنیم/لینک را بفرستید")
-            chat = await c.get_chat(x)
+            chat = await c.get_chat(str(x))
             await c.send_message(
                 chat_id=m.chat.id,
                 text= f"آیدی {chat.title} : {chat.id}"
