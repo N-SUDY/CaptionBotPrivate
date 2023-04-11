@@ -34,7 +34,7 @@ loop = asyncio.get_event_loop()
 
 
 async def start_services():
-    logging.info('------------------- Initalizing Caption Bot -------------------')
+    logging.info('-------- Initalizing Caption Bot --------')
     await app.start()
     bot_info = await app.get_me()
     logging.debug(bot_info)
@@ -42,9 +42,9 @@ async def start_services():
     logging.info("bot =>> {}".format(bot_info.first_name))
     if bot_info.dc_id:
         logging.info("DC ID =>> {}".format(str(bot_info.dc_id)))
-    logging.info('----------------------------- DONE -----------------------------')
+    logging.info('------------------- DONE --------------------')
     logging.info('\n')
-    logging.info('--------------------------- Importing Plugins ---------------------------')
+    logging.info('------------- Importing Plugins ------------')
     for name in files:
         with open(name) as a:
             patt = Path(a.name)
@@ -56,6 +56,7 @@ async def start_services():
             spec.loader.exec_module(load)
             sys.modules["Bot.plugins." + plugin_name] = load
             logging.info("Imported => " + plugin_name)
+            logging.info('----------- Caption Bot is Ready to Use ------------')
     await idle()
     
     
@@ -73,4 +74,4 @@ if __name__ == '__main__':
     finally:
         loop.run_until_complete(cleanup())
         loop.stop()
-        logging.info("----------------------- Service Stopped -----------------------")
+        logging.info("--------- Service Stopped ---------")
