@@ -12,7 +12,7 @@ PASS = ["ok"]
 async def verifys(c: Client, m: Message):
     id = m.from_user.id
     if not id in x:
-        verify = await c.ask(m.chat.id, "پسورد را وارد کنید")
+        verify = await m.chat.ask("پسورد را وارد کنید")
         if verify.text in PASS:
             x.append(id) 
             await m.reply("شما به لیست ادمین ها افزوده شدید و هم اکنون میتوانید از بات استفاده نمایید", quote=True)
