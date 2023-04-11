@@ -18,7 +18,7 @@ async def id_command(c: Client, m: Message):
             chat = await c.get_chat(x.text)
             await c.send_message(
                 chat_id=m.chat.id,
-                text= f"آیدی {chat.title} : {chat.id}"
+                text= f"آیدی {chat.title} : `{chat.id}`"
             )
         except Exception as er:
             await c.send_message(
