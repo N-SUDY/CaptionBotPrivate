@@ -17,10 +17,13 @@ from Bot.config import Var
 
 
 logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-)
-logging.getLogger("pyrogram").setLevel(logging.ERROR)
+    level=logging.DEBUG if Var.DEBUG else logging.INFO,
+    datefmt="%d/%m/%Y %H:%M:%S",
+    format="[%(asctime)s][%(name)s][%(levelname)s] ==> %(message)s",
+    handlers=[logging.StreamHandler(stream=sys.stdout),
+              logging.FileHandler("captionbot.log", mode="a", encoding="utf-8")],)
+
+logging.getLogger("pyrogram").setLevel(logging.INFO if Var.DEBUG else logging.ERROR)
 
 
 ppath = "Bot/plugins/*.py"
@@ -31,12 +34,17 @@ loop = asyncio.get_event_loop()
 
 
 async def start_services():
-    print('\n')
-    print('------------------- Initalizing Caption Bot -------------------')
-    await app.run()
-    print('----------------------------- DONE -----------------------------')
-    print('\n')
-    print('--------------------------- Importing ---------------------------')
+    logging.info('------------------- Initalizing Caption Bot -------------------')
+    await app.start()
+    bot_info = await app.get_me()
+    logging.debug(bot_info)
+    app.username = bot_info.username
+    logging.info("bot =>> {}".format(bot_info.first_name))
+    if bot_info.dc_id:
+        logging.info("DC ID =>> {}".format(str(bot_info.dc_id)))
+    logging.info('----------------------------- DONE -----------------------------')
+    logging.info('\n')
+    logging.info('--------------------------- Importing Plugins ---------------------------')
     for name in files:
         with open(name) as a:
             patt = Path(a.name)
@@ -47,11 +55,22 @@ async def start_services():
             load = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(load)
             sys.modules["Bot.plugins." + plugin_name] = load
-            print("Imported => " + plugin_name)
+            logging.info("Imported => " + plugin_name)
     await idle()
-
-if __name__ == '__main__':
+    
+    
+async def cleanup():
+    await app.stop()
+    
+    
+if __name__ == '__main__':        
     try:
         loop.run_until_complete(start_services())
     except KeyboardInterrupt:
-        logging.info('----------------------- Service Stopped -----------------------')
+        pass
+    except Exception as err:
+        logging.error(err.with_traceback(None))
+    finally:
+        loop.run_until_complete(cleanup())
+        loop.stop()
+        logging.info("----------------------- Service Stopped -----------------------")
