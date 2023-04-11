@@ -7,19 +7,22 @@ from pyrogram.errors.exceptions.bad_request_400 import ChannelInvalid
 from Bot import app
 from Bot.plugins import *
 
-@app.on_message(filters.command("id") & (filters.channel | filters.group) & ~filters.edited)
-async def findid(c: Client, m: Message):
-    id = m.from_user.id
-    try:
-        if not id in x:
-            vf = await verifys(c, m) 
-        else:
-            print("ok")
-            await m.reply_text(f"آیدی عددی : `{m.chat.id}`") 
-    except Exception:
-        print(str(Exception)) 
 
-@app.on_message(filters.regex("بفرس") & filters.incoming & filters.private & ~filters.edited)
+@app.on_message(filters.command("id"))
+async def id_command(c: Client, m: Message):
+    try:
+        chat = await c.get_chat(m.text.split()[1])
+        await c.send_message(
+            chat_id=m.chat.id,
+            text=f"{chat.title} ID is: {chat.id}"
+        )
+    except Exception:
+        await c.send_message(
+            chat_id=m.chat.id,
+            text="یوزرنیم/لینکی که فرستادید معتبر نمی باشد"
+        )
+      
+@app.on_message(filters.regex("بفرس") & filters.incoming & filters.private)
 async def send(c: Client, m: Message):
     id = m.from_user.id
     cmd = m.text.split("_")[-1]
@@ -36,7 +39,7 @@ async def send(c: Client, m: Message):
         else:
             await c.send_message(m.chat.id, "شما بر روی فایل مورد نظر خود ریپلای نکردید")
 
-@app.on_message(filters.regex("لیست چنل") & filters.incoming & filters.private & ~filters.edited)
+@app.on_message(filters.regex("لیست چنل") & filters.incoming & filters.private)
 async def show_channels(c: Client, m: Message):
     id = m.from_user.id
     cmd = m.text.split("_")[-1]
@@ -54,7 +57,7 @@ async def show_channels(c: Client, m: Message):
             return 
 
 
-@app.on_message(filters.regex("افزودن چنل") & filters.incoming & filters.private & ~filters.edited)
+@app.on_message(filters.regex("افزودن چنل") & filters.incoming & filters.private)
 async def add_channel(c: Client, m: Message):
     id = m.from_user.id
     cmd = m.text.split("_")[-1]
@@ -82,7 +85,7 @@ async def add_channel(c: Client, m: Message):
         except Exception as e:
             return 
 
-@app.on_message(filters.regex("حذف چنل") & filters.incoming & filters.private & ~filters.edited)
+@app.on_message(filters.regex("حذف چنل") & filters.incoming & filters.private)
 async def rem_channel(c: Client, m: Message):
     id = m.from_user.id
     cmd = m.text.split("_")[-1]
@@ -111,7 +114,7 @@ async def rem_channel(c: Client, m: Message):
             return 
 
 
-@app.on_message(filters.regex("لیست ادمین") & filters.incoming & filters.private & ~filters.edited)
+@app.on_message(filters.regex("لیست ادمین") & filters.incoming & filters.private)
 async def show_admins(c: Client, m: Message):
     id = m.from_user.id
     cmd = m.text.split("_")[-1]
@@ -128,7 +131,7 @@ async def show_admins(c: Client, m: Message):
             return 
 
 
-@app.on_message(filters.regex("افزودن ادمین") & filters.incoming & filters.private & ~filters.edited)
+@app.on_message(filters.regex("افزودن ادمین") & filters.incoming & filters.private)
 async def add_admin(c: Client, m: Message):
     id = m.from_user.id
     cmd = m.text.split("_")[-1]
@@ -152,7 +155,7 @@ async def add_admin(c: Client, m: Message):
             return 
 
 
-@app.on_message(filters.regex("حذف ادمین") & filters.incoming & filters.private & ~filters.edited)
+@app.on_message(filters.regex("حذف ادمین") & filters.incoming & filters.private)
 async def rem_admin(c: Client, m: Message):
     id = m.from_user.id
     cmd = m.text.split("_")[-1]
@@ -178,7 +181,7 @@ async def rem_admin(c: Client, m: Message):
             return 
 
 
-@app.on_message(filters.regex("لیست پسورد") & filters.incoming & filters.private & ~filters.edited)
+@app.on_message(filters.regex("لیست پسورد") & filters.incoming & filters.private)
 async def show_pass(c: Client, m: Message):
     id = m.from_user.id
     cmd = m.text.split("_")[-1]
@@ -195,7 +198,7 @@ async def show_pass(c: Client, m: Message):
             return 
 
 
-@app.on_message(filters.regex("افزودن پسورد") & filters.incoming & filters.private & ~filters.edited)
+@app.on_message(filters.regex("افزودن پسورد") & filters.incoming & filters.private)
 async def add_pass(c: Client, m: Message):
     id = m.from_user.id
     cmd = m.text.split("_")[-1]
@@ -217,7 +220,7 @@ async def add_pass(c: Client, m: Message):
             return 
 
 
-@app.on_message(filters.regex("حذف پسورد") & filters.incoming & filters.private & ~filters.edited)
+@app.on_message(filters.regex("حذف پسورد") & filters.incoming & filters.private)
 async def rem_pass(c: Client, m: Message):
     id = m.from_user.id
     cmd = m.text.split("_")[-1]
