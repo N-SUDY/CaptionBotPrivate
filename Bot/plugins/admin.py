@@ -8,19 +8,23 @@ from Bot import app
 from Bot.plugins import *
 
 
-@app.on_message(filters.command("id"))
+@app.on_message(filters.regex("آیدی") & filters.incoming & filters.private)
 async def id_command(c: Client, m: Message):
-    try:
-        chat = await c.get_chat(m.text.split()[1])
-        await c.send_message(
-            chat_id=m.chat.id,
-            text=f"{chat.title} ID is: {chat.id}"
-        )
-    except Exception:
-        await c.send_message(
-            chat_id=m.chat.id,
-            text="یوزرنیم/لینکی که فرستادید معتبر نمی باشد"
-        )
+    id = m.from_user.id
+    cmd = m.text.split("_")[-1]
+    if cmd == "آیدی":
+        try:
+            x = await m.chat.ask("یوزرنیم/لینک را بفرستید")
+            chat = await c.get_chat(x)
+            await c.send_message(
+                chat_id=m.chat.id,
+                text= f"آیدی {chat.title} : {chat.id}"
+            )
+        except Exception as er:
+            await c.send_message(
+                chat_id=m.chat.id,
+                text= f"یوزرنیم/لینکی که فرستادید معتبر نمی باشد\nمتن ارور:\n{str(er)}"
+            )
       
 @app.on_message(filters.regex("بفرس") & filters.incoming & filters.private)
 async def send(c: Client, m: Message):
