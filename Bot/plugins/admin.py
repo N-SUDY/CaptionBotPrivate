@@ -14,7 +14,7 @@ async def id_command(c: Client, m: Message):
     cmd = m.text.split("_")[-1]
     if cmd == "آیدی":
         try:
-            x = await m.chat.ask("یوزرنیم/لینک را بفرستید")
+            x = await m.chat.ask("یوزرنیم را بفرستید")
             chat = await c.get_chat(x.text)
             await c.send_message(
                 chat_id=m.chat.id,
@@ -23,7 +23,7 @@ async def id_command(c: Client, m: Message):
         except Exception as er:
             await c.send_message(
                 chat_id=m.chat.id,
-                text= f"یوزرنیم/لینکی که فرستادید معتبر نمی باشد\nمتن ارور:\n{str(er)}"
+                text= f"یوزرنیمی که فرستادید معتبر نمی باشد\nمتن ارور:\n{str(er)}"
             )
       
 @app.on_message(filters.regex("بفرس") & filters.incoming & filters.private)
