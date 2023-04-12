@@ -5,17 +5,14 @@ from pyrogram.types import Message
 from pyrogram.errors.exceptions.bad_request_400 import ChannelInvalid
 from pyrogram.dispatcher import Dispatcher
 
-from Bot import app
+from Bot import *
 from Bot.plugins import *
 
 @app.on_message(filters.command(["id"]) & filters.channel)
-async def channel_id(c: Client, m: Message):
-    if m.from_user is None:
-        _id = m.sender_chat.id
-    else:
-        _id = m.from_user.id
+async def id_channel(c: Client, m: Message):
     try:
-        await m.reply(f"آیدی : `{_id}`")
+        x = await pyromod_is_shit(c, m) 
+        await m.reply(f"آیدی : `{x}`")
     except Exception as e:
         return str(e)
             
