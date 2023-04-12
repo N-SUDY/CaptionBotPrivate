@@ -7,7 +7,7 @@ from pyrogram.errors.exceptions.bad_request_400 import ChannelInvalid
 from Bot import app
 from Bot.plugins import *
 
-@app.on_message(filters.command(["getid"]) & filters.group & filters.channel)
+#@app.on_message(filters.command(["getid"]) & filters.channel)
 async def id_channel(c: Client, m: Message):
     cmd = m.text.split("_")[-1]
     if cmd == "/getid":
