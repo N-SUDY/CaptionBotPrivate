@@ -2,6 +2,6 @@ asyncio
 dnspython
 motor
 pyrogram
-pyromod
+pyromod==1.5
 python-dotenv
 tgcrypto
