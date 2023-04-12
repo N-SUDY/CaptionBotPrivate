@@ -23,7 +23,7 @@ async def incoming(c: Client, m: Message):
 
 
 async def get_caption(c: Client, m: Message):
-    caption = await m.chat.ask("کپشن خود را ارسال نمایید. برای کنسل کردن این فرایند بنویسید `کنسل`")
+    caption = await c.ask(m.chat.id, "کپشن خود را ارسال نمایید. برای کنسل کردن این فرایند بنویسید `کنسل`")
     if not caption.text:
         await caption.reply("کپشنی یافت نشد", quote=True)
         return await get_caption(c, m)
