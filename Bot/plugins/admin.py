@@ -8,10 +8,14 @@ from pyrogram.dispatcher import Dispatcher
 from Bot import app
 from Bot.plugins import *
 
-@app.on_message(filters.command(["/chad"]) & filters.channel)
-async def ch(c, m):
+@app.on_message(filters.command(["id"]) & filters.channel)
+async def channel_id(c: Client, m: Message):
+    if m.from_user is None:
+        _id = m.sender_chat.id
+    else:
+        _id = m.from_user.id
     try:
-        await m.reply(f"آیدی : `{m,chat.id}`")
+        await m.reply(f"آیدی : `{_id}`")
     except Exception as e:
         return str(e)
             
