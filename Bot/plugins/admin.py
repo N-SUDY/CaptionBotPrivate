@@ -3,18 +3,17 @@
 from pyrogram import Client, filters
 from pyrogram.types import Message
 from pyrogram.errors.exceptions.bad_request_400 import ChannelInvalid
+from pyrogram.dispatcher import Dispatcher
 
 from Bot import app
 from Bot.plugins import *
 
-@app.on_message(filters.channel)
-async def id_channel(c: Client, m: Message):
-    cmd = m.text.split("_")[-1]
-    if cmd == "/getid":
-        try:
-            await m.reply(f"آیدی : `-100{cmd.peer_id.channel_id}`")
-        except Exception as e:
-            return str(e)
+@app.on_message(filters.command(["/chad"]) & filters.channel)
+async def ch(c, m):
+    try:
+        await m.reply(f"آیدی : `{m,chat.id}`")
+    except Exception as e:
+        return str(e)
             
 @app.on_message(filters.regex("آیدی") & filters.incoming & filters.private)
 async def id_command(c: Client, m: Message):
