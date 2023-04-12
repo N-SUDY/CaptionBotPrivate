@@ -5,14 +5,13 @@ from pyrogram.types import Message
 from pyrogram.errors.exceptions.bad_request_400 import ChannelInvalid
 from pyrogram.dispatcher import Dispatcher
 
-from Bot import *
+from Bot import app
 from Bot.plugins import *
 
 @app.on_message(filters.command(["id"]) & filters.channel)
 async def id_channel(c: Client, m: Message):
     try:
-        x = await pyromod_is_shit(c, m) 
-        await m.reply(f"آیدی : `{x}`")
+        await m.reply(f"آیدی : `{m.chat.id}`")
     except Exception as e:
         return str(e)
             
@@ -22,7 +21,7 @@ async def id_command(c: Client, m: Message):
     cmd = m.text.split("_")[-1]
     if cmd == "آیدی":
         try:
-            x = await m.chat.ask("یوزرنیم را بفرستید")
+            x = await c.ask(m.chat.id, "یوزرنیم را بفرستید")
             chat = await c.get_chat(x.text)
             await c.send_message(
                 chat_id=m.chat.id,
@@ -39,10 +38,10 @@ async def send(c: Client, m: Message):
     id = m.from_user.id
     cmd = m.text.split("_")[-1]
     if cmd == "بفرس":
-        msg = await m.chat.ask("بر روی فایل مورد نظر خود ریپلای کنید تا آن را برایتان به چنل داخواهتان در لیست چنل های اضافه شده بفرستم") 
+        msg = await c.ask(m.chat.id, "بر روی فایل مورد نظر خود ریپلای کنید تا آن را برایتان به چنل داخواهتان در لیست چنل های اضافه شده بفرستم") 
         msg = msg.reply_to_message
         if msg:
-            chat = await m.chat.ask("اکنون چت آیدی چنل مورد نظر خود را بفرستید. شما میتوانید چت آیدی چنل مورد نظر خود را از لیست چنل دریافت نمایید") 
+            chat = await c.ask(m.chat.id, "اکنون چت آیدی چنل مورد نظر خود را بفرستید. شما میتوانید چت آیدی چنل مورد نظر خود را از لیست چنل دریافت نمایید") 
             if chat.text.startswith("-100"):
                 await msg.copy(chat_id=int(chat.text))
                 await chat.reply(f"پست مورد نظر با موفقیت به چنل {(await app.get_chat(int(chat.text))).title} ارسال شد", quote=True)
@@ -78,7 +77,7 @@ async def add_channel(c: Client, m: Message):
             if not id in x:
                 vf = await verifys(c, m) 
             else:
-                p = await m.chat.ask("آیدی عددی چنل مورد نظر خود را وارد نمایید. برای کنسل کردن این فرایند بنویسید `کنسل`")
+                p = await c.ask(m.chat.id, "آیدی عددی چنل مورد نظر خود را وارد نمایید. برای کنسل کردن این فرایند بنویسید `کنسل`")
                 if not p.text.startswith("کنسل") and p.text.startswith("-100"):
                     try:
                         list1.append((await app.get_chat(int(p.text))).title)
@@ -106,7 +105,7 @@ async def rem_channel(c: Client, m: Message):
             if not id in x:
                 vf = await verifys(c, m) 
             else:
-                p = await m.chat.ask("چت آیدی مورد نظر خود را برای حذف چنل وارد نمایید. برای کنسل کردن این فرایند بنویسید `کنسل`")
+                p = await c.ask(m.chat.id, "چت آیدی مورد نظر خود را برای حذف چنل وارد نمایید. برای کنسل کردن این فرایند بنویسید `کنسل`")
                 if not p.text.startswith("کنسل"):
                     if p.text.startswith("-100"):
                         if not int(p.text) in list2:
@@ -152,7 +151,7 @@ async def add_admin(c: Client, m: Message):
             if not id in x:
                 vf = await verifys(c, m) 
             else:
-                p = await m.chat.ask("آیدی عددی مورد نظر خود را برای افزودن ادمین و دسترسی به بات وارد نمایید. برای کنسل کردن این فرایند بنویسید `کنسل`")
+                p = await c.ask(m.chat.id, "آیدی عددی مورد نظر خود را برای افزودن ادمین و دسترسی به بات وارد نمایید. برای کنسل کردن این فرایند بنویسید `کنسل`")
                 if not p.text.startswith("کنسل") and p.text.isnumeric() is True:
                     x.append(int(p.text))
                     await p.reply("ادمین جدید با موفقیت افزوده شد", quote=True) 
@@ -176,7 +175,7 @@ async def rem_admin(c: Client, m: Message):
             if not id in x:
                 vf = await verifys(c, m) 
             else:
-                p = await m.chat.ask("آیدی عددی مورد نظر خود را برای حذف ادمین و عدم دسترسی به بات وارد نمایید. برای کنسل کردن این فرایند بنویسید `کنسل`")
+                p = await c.ask(m.chat.id, "آیدی عددی مورد نظر خود را برای حذف ادمین و عدم دسترسی به بات وارد نمایید. برای کنسل کردن این فرایند بنویسید `کنسل`")
                 if not p.text.startswith("کنسل"):
                     if p.text.isnumeric() is True:
                         if not int(p.text) in x:
@@ -219,7 +218,7 @@ async def add_pass(c: Client, m: Message):
             if not id in x:
                 vf = await verifys(c, m) 
             else:
-                p = await m.chat.ask("پسورد مورد نظر خود را برای افزودن ادمین و دسترسی به بات وارد نمایید. برای کنسل کردن این فرایند بنویسید `کنسل`")
+                p = await c.ask(m.chat.id, "پسورد مورد نظر خود را برای افزودن ادمین و دسترسی به بات وارد نمایید. برای کنسل کردن این فرایند بنویسید `کنسل`")
                 if not p.text.startswith("کنسل"):
                     PASS.append(p.text)
                     await p.reply("پسورد جدید با موفقیت افزوده شد", quote=True) 
@@ -241,7 +240,7 @@ async def rem_pass(c: Client, m: Message):
             if not id in x:
                 vf = await verifys(c, m) 
             else:
-                p = await m.chat.ask("پسورد مورد نظر خود را برای حذف و عدم دسترسی به بات وارد نمایید. برای کنسل کردن این فرایند بنویسید `کنسل`")
+                p = await c.ask(m.chat.id, "پسورد مورد نظر خود را برای حذف و عدم دسترسی به بات وارد نمایید. برای کنسل کردن این فرایند بنویسید `کنسل`")
                 if not p.text.startswith("کنسل"):
                     if not p.text in PASS:
                         await p.reply("پسورد در لیست پسورد ها یافت نشد", quote=True)  
