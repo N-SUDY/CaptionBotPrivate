@@ -17,7 +17,7 @@ async def incoming(c: Client, m: Message):
             caption = await get_caption(c, m)
             if caption is True:
                 return
-            await m.copy(chat_id=m.chat.id, caption=caption, reply_to_message_id=m.message_id)
+            await m.copy(chat_id=m.chat.id, caption=caption, reply_to_message_id=m.id)
     except Exception as e:
         return 
 
