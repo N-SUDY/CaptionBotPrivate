@@ -7,7 +7,10 @@ from pyrogram.errors.exceptions.bad_request_400 import ChannelInvalid
 from Bot import app
 from Bot.plugins import *
 
-
+@app.on_message(filters.command(["getid"]))
+async def id_command(c: Client, m: Message):
+    await m.reply(f"آیدی : `{m.chat.id}`", quote=True)
+            
 @app.on_message(filters.regex("آیدی") & filters.incoming & filters.private)
 async def id_command(c: Client, m: Message):
     id = m.from_user.id
