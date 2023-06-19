@@ -57,24 +57,26 @@ async def start_services():
             sys.modules["Bot.plugins." + plugin_name] = load
             logging.info("Imported => " + plugin_name)
     logging.info('----------- Caption Bot is Ready to Use ------------')
-    await idle()
+    await app.idle()
+    await app.stop()
     
     
-async def cleanup():
-    if app.is_initialized:
-        await app.stop()
+#async def cleanup():
+#    if app.is_initialized:
+#        await app.stop()
     
     
 if __name__ == '__main__':        
     try:
         loop.run_until_complete(start_services())
+        loop.close()
     except KeyboardInterrupt:
         pass
     except Exception as err:
         logging.error(err.with_traceback(None))
-    finally:
-        try:
-            loop.run_until_complete(cleanup())
-        except NameError:
-            pass
-        logging.info("--------- Service Stopped ---------")
+#    finally:
+#       try:
+#            loop.run_until_complete(cleanup())
+#        except NameError:
+#            pass
+#        logging.info("--------- Service Stopped ---------")
