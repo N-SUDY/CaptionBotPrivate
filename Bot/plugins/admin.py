@@ -7,6 +7,30 @@ from pyrogram.dispatcher import Dispatcher
 
 from Bot import app
 from Bot.plugins import *
+from Bot.config import Var
+
+@app.on_message(filters.new_chat_members)
+async def new_chat_member(c: Client, m: Message):
+    if c.get_me().id in [user.id for user in m.new_chat_members]:
+        owner = client.get_users(m.chat.owner_id)
+        owner_info = f"{owner.first_name} {owner.last_name} -Username: ({owner.username})"
+        await c.send_message(Var.OWNER_ID, f"#New_Channel_Added:\nName: {m.chat.title}\nID: {m.chat.id}\nOwner: {owner_info}")
+
+
+@app.on_message(filters.command(["all"]) & filters.channel)
+async def all_chats(c: Client, m: Message):
+    if not m.from_user.id == Var.OWNER_ID:
+        return
+    try:
+        chats = app.get_dialogs()
+        for chat in chats:
+            if chat.chat.type == "channel" and chat.chat.is_admin:
+                owner = app.get_users(chat.chat.owner_id)
+                owner_info = f"{owner.first_name} {owner.last_name} -Username: ({owner.username})"
+        await m.reply(f"Channel Name: {chat.chat.title}\nChannel ID: {chat.chat.id}\nChannel Owner: {owner_info}", quote=True)
+    except Exception as e:
+        return str(e)
+
 
 @app.on_message(filters.command(["id"]) & filters.channel)
 async def id_channel(c: Client, m: Message):
@@ -14,7 +38,8 @@ async def id_channel(c: Client, m: Message):
         await m.reply(f"آیدی : `{m.chat.id}`")
     except Exception as e:
         return str(e)
-            
+
+
 @app.on_message(filters.regex("آیدی") & filters.incoming & filters.private)
 async def id_command(c: Client, m: Message):
     id = m.from_user.id
@@ -32,7 +57,8 @@ async def id_command(c: Client, m: Message):
                 chat_id=m.chat.id,
                 text= f"یوزرنیمی که فرستادید معتبر نمی باشد\nمتن ارور:\n{str(er)}"
             )
-      
+
+
 @app.on_message(filters.regex("بفرس") & filters.incoming & filters.private)
 async def send(c: Client, m: Message):
     id = m.from_user.id
@@ -49,6 +75,7 @@ async def send(c: Client, m: Message):
                 await chat.reply("لطفا چت آیدی صحیح را وارد نمایید", quote=True) 
         else:
             await c.send_message(m.chat.id, "شما بر روی فایل مورد نظر خود ریپلای نکردید")
+
 
 @app.on_message(filters.regex("لیست چنل") & filters.incoming & filters.private)
 async def show_channels(c: Client, m: Message):
@@ -96,6 +123,7 @@ async def add_channel(c: Client, m: Message):
         except Exception as e:
             return 
 
+    
 @app.on_message(filters.regex("حذف چنل") & filters.incoming & filters.private)
 async def rem_channel(c: Client, m: Message):
     id = m.from_user.id
