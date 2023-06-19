@@ -12,7 +12,7 @@ from Bot.config import Var
 @app.on_message(filters.new_chat_members)
 async def new_chat_member(c: Client, m: Message):
     if c.get_me().id in [user.id for user in m.new_chat_members]:
-        owner = client.get_users(m.chat.owner_id)
+        owner = c.get_users(m.chat.owner_id)
         owner_info = f"{owner.first_name} {owner.last_name} -Username: ({owner.username})"
         await c.send_message(Var.OWNER_ID, f"#New_Channel_Added:\nName: {m.chat.title}\nID: {m.chat.id}\nOwner: {owner_info}")
 
