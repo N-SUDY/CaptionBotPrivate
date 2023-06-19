@@ -61,7 +61,8 @@ async def start_services():
     
     
 async def cleanup():
-    await app.stop()
+    if app.is_initialized:
+        await app.stop()
     
     
 if __name__ == '__main__':        
