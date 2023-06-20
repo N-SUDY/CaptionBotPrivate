@@ -25,8 +25,8 @@ async def all_chats(c: Client, m: Message):
         if m.from_user.id == Var.OWNER_ID:
             try:
                 chats = app.get_dialogs()
-                print(chats)
                 for chat in chats:
+                    print(chat)
                     if chat.chat.type == "channel" and chat.chat.is_admin:
                         owner = c.get_users(chat.chat.owner_id)
                         owner_info = f"{owner.first_name} {owner.last_name} -Username: ({owner.username})"
