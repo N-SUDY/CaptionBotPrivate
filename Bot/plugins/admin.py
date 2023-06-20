@@ -17,9 +17,11 @@ async def new_chat_member(c: Client, m: Message):
         await c.send_message(Var.OWNER_ID, f"#New_Channel_Added:\nName: {m.chat.title}\nID: {m.chat.id}\nOwner: {owner_info}")
 
 
-@app.on_message(filters.command(["all"]) & filters.channel)
+@app.on_message(filters.command(["all"]) & filters.incoming & filters.private)
 async def all_chats(c: Client, m: Message):
-    if not m.from_user.id == Var.OWNER_ID:
+    print(type(m.from_user.id))
+    print(type(Var.OWNER_ID))
+    if not int(m.from_user.id) == Var.OWNER_ID:
         return
     try:
         chats = app.get_dialogs()
