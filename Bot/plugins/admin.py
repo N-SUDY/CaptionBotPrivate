@@ -11,8 +11,8 @@ from Bot.config import Var
 
 @app.on_message(filters.new_chat_members)
 async def new_chat_member(c: Client, m: Message):
-    if c.get_me().id in [user.id for user in m.new_chat_members]:
-        owner = c.get_users(m.chat.owner_id)
+    if app.get_me().id in [user.id for user in m.new_chat_members]:
+        owner = app.get_users(m.chat.owner_id)
         owner_info = f"{owner.first_name} {owner.last_name} -Username: ({owner.username})"
         await c.send_message(Var.OWNER_ID, f"#New_Channel_Added:\nName: {m.chat.title}\nID: {m.chat.id}\nOwner: {owner_info}")
 
@@ -21,17 +21,18 @@ async def new_chat_member(c: Client, m: Message):
 async def all_chats(c: Client, m: Message):
     cmd = m.text.split("_")[-1]
     if cmd == "چتز":
-        if m.from_user.id != Var.OWNER_ID:
-            return
-        try:
-            chats = c.get_dialogs()
-            for chat in chats:
-                if chat.chat.type == "channel" and chat.chat.is_admin:
-                    owner = c.get_users(chat.chat.owner_id)
-                    owner_info = f"{owner.first_name} {owner.last_name} -Username: ({owner.username})"
-            await m.reply(f"Channel Name: {chat.chat.title}\nChannel ID: {chat.chat.id}\nChannel Owner: {owner_info}", quote=True)
-        except Exception as e:
-            return str(e)
+        print(m.from_user.id)
+        if m.from_user.id == Var.OWNER_ID:
+            try:
+                chats = app.get_dialogs()
+                print(chats)
+                for chat in chats:
+                    if chat.chat.type == "channel" and chat.chat.is_admin:
+                        owner = c.get_users(chat.chat.owner_id)
+                        owner_info = f"{owner.first_name} {owner.last_name} -Username: ({owner.username})"
+                await m.reply(f"Channel Name: {chat.chat.title}\nChannel ID: {chat.chat.id}\nChannel Owner: {owner_info}", quote=True)
+            except Exception as e:
+                return str(e)
 
 
 @app.on_message(filters.command(["id"]) & filters.channel)
