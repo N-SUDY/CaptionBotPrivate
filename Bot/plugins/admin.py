@@ -21,9 +21,7 @@ async def new_chat_member(c: Client, m: Message):
 async def all_chats(c: Client, m: Message):
     cmd = m.text.split("_")[-1]
     if cmd == "چتز":
-        print(type(m.from_user.id))
-        print(type(Var.OWNER_ID))
-        if not int(m.from_user.id) == Var.OWNER_ID:
+        if m.from_user.id != Var.OWNER_ID:
             return
         try:
             chats = c.get_dialogs()
