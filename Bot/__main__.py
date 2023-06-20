@@ -5,6 +5,7 @@ import asyncio
 import logging
 import time
 import os
+import signal
 import sys
 import importlib
 import re
@@ -57,26 +58,24 @@ async def start_services():
             sys.modules["Bot.plugins." + plugin_name] = load
             logging.info("Imported => " + plugin_name)
     logging.info('----------- Caption Bot is Ready to Use ------------')
-    await app.idle()
-    await app.stop()
+    await idle()
     
     
-#async def cleanup():
-#    if app.is_initialized:
-#        await app.stop()
+async def cleanup():
+    await server.cleanup()
+    if app.is_connected:
+        await app.stop()
+        
+async def handle_termination(signum, frame):
+    print("Received termination signal")
+    await cleanup()
+    sys.exit(0)
     
-    
-if __name__ == '__main__':        
+if __name__ == "__main__":
+    signal.signal(signal.SIGINT, lambda s,f: asyncio.ensure_future(handle_termination(s,f)))
+    signal.signal(signal.SIGTERM, lambda s,f: asyncio.ensure_future(handle_termination(s,f)))
     try:
         loop.run_until_complete(start_services())
-        loop.close()
+        loop.run_forever()
     except KeyboardInterrupt:
-        pass
-    except Exception as err:
-        logging.error(err.with_traceback(None))
-#    finally:
-#       try:
-#            loop.run_until_complete(cleanup())
-#        except NameError:
-#            pass
-#        logging.info("--------- Service Stopped ---------")
+        print("------------------------ Stopped Services ------------------------")
