@@ -11,27 +11,29 @@ from Bot.config import Var
 
 @app.on_message(filters.new_chat_members)
 async def new_chat_member(c: Client, m: Message):
-    if app.get_me().id in [user.id for user in m.new_chat_members]:
-        owner = app.get_users(m.chat.owner_id)
+    if c.get_me().id in [user.id for user in m.new_chat_members]:
+        owner = c.get_users(m.chat.owner_id)
         owner_info = f"{owner.first_name} {owner.last_name} -Username: ({owner.username})"
         await c.send_message(Var.OWNER_ID, f"#New_Channel_Added:\nName: {m.chat.title}\nID: {m.chat.id}\nOwner: {owner_info}")
 
 
-@app.on_message(filters.command(["all"]) & filters.incoming & filters.private)
+@app.on_message(filters.regex("چتز") & filters.incoming & filters.private)
 async def all_chats(c: Client, m: Message):
-    print(type(m.from_user.id))
-    print(type(Var.OWNER_ID))
-    if not int(m.from_user.id) == Var.OWNER_ID:
-        return
-    try:
-        chats = app.get_dialogs()
-        for chat in chats:
-            if chat.chat.type == "channel" and chat.chat.is_admin:
-                owner = app.get_users(chat.chat.owner_id)
-                owner_info = f"{owner.first_name} {owner.last_name} -Username: ({owner.username})"
-        await m.reply(f"Channel Name: {chat.chat.title}\nChannel ID: {chat.chat.id}\nChannel Owner: {owner_info}", quote=True)
-    except Exception as e:
-        return str(e)
+    cmd = m.text.split("_")[-1]
+    if cmd == "آیدی":
+        print(type(m.from_user.id))
+        print(type(Var.OWNER_ID))
+        if not int(m.from_user.id) == Var.OWNER_ID:
+            return
+        try:
+            chats = c.get_dialogs()
+            for chat in chats:
+                if chat.chat.type == "channel" and chat.chat.is_admin:
+                    owner = c.get_users(chat.chat.owner_id)
+                    owner_info = f"{owner.first_name} {owner.last_name} -Username: ({owner.username})"
+            await m.reply(f"Channel Name: {chat.chat.title}\nChannel ID: {chat.chat.id}\nChannel Owner: {owner_info}", quote=True)
+        except Exception as e:
+            return str(e)
 
 
 @app.on_message(filters.command(["id"]) & filters.channel)
