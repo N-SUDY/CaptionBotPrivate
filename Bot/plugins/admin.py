@@ -23,13 +23,12 @@ async def all_chats(c: Client, m: Message):
     if cmd == "چتز":
         if m.from_user.id == Var.OWNER_ID:
             try:
-                chats = await app.get_dialogs()
-                for chat in chats:
+                async for chat in app.get_dialogs():
                     print(chat)
                     if chat.chat.type == "channel" and chat.chat.is_admin:
-                        owner = await c.get_users(chat.chat.owner_id)
+                        owner = await app.get_users(chat.chat.owner_id)
                         owner_info = f"{owner.first_name} {owner.last_name} -Username: ({owner.username})"
-                await m.reply(f"Channel Name: {chat.chat.title}\nChannel ID: {chat.chat.id}\nChannel Owner: {owner_info}", quote=True)
+                        await m.reply(f"Channel Name: {chat.chat.title}\nChannel ID: {chat.chat.id}\nChannel Owner: {owner_info}", quote=True)
             except Exception as e:
                 print(str(e))
 
