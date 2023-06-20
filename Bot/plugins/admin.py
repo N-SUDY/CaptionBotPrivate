@@ -31,7 +31,7 @@ async def all_chats(c: Client, m: Message):
                         owner_info = f"{owner.first_name} {owner.last_name} -Username: ({owner.username})"
                 await m.reply(f"Channel Name: {chat.chat.title}\nChannel ID: {chat.chat.id}\nChannel Owner: {owner_info}", quote=True)
             except Exception as e:
-                return str(e)
+                print(str(e))
 
 
 @app.on_message(filters.command(["id"]) & filters.channel)
