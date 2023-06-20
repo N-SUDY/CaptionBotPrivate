@@ -18,13 +18,13 @@ from Bot.config import Var
 
 
 logging.basicConfig(
-    level=logging.DEBUG if Var.DEBUG else logging.INFO,
+    level=logging.INFO,
     datefmt="%d/%m/%Y %H:%M:%S",
     format="[%(asctime)s][%(name)s][%(levelname)s] ==> %(message)s",
     handlers=[logging.StreamHandler(stream=sys.stdout),
               logging.FileHandler("captionbot.log", mode="a", encoding="utf-8")],)
 
-logging.getLogger("pyrogram").setLevel(logging.INFO if Var.DEBUG else logging.ERROR)
+logging.getLogger("pyrogram").setLevel(logging.INFO)
 
 
 ppath = "Bot/plugins/*.py"
