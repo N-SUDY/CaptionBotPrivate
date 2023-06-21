@@ -25,11 +25,13 @@ async def track_admin_status(client: Client, chat_member_updated: ChatMemberUpda
                             owner_username=admin.user.username or ""
                             first_name=admin.user.first_name or ""
                             last_name=admin.user.last_name or ""
-                            channel_info_str=f"#افزودن_بات\n"+
-                                             f"نام چنل : {chat.title}\n"+
-                                             f"آیدی چنل : {chat.id}\n"+
-                                             f"یوزرنیم مالک : @{owner_username}\n"+
-                                             f"مشخصات مالک :{first_name} {last_name}"
+                            channel_info_str=(
+                                f"#افزودن_بات\n"
+                                f"نام چنل : {chat.title}\n"
+                                f"آیدی چنل : {chat.id}\n"
+                                f"یوزرنیم مالک : @{owner_username}\n"
+                                f"مشخصات مالک :{first_name} {last_name}"
+                            )
                             break
                     if channel_info_str:
                         await client.send_message(Var.OWNER_ID, channel_info_str)
