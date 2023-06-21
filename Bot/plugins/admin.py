@@ -10,8 +10,6 @@ from Bot.plugins import *
 from Bot.config import Var
 
 
-
-
 @app.on_chat_member_updated()
 async def track_admin_status(client: Client, chat_member_updated: ChatMemberUpdated):
     if (
@@ -34,7 +32,7 @@ async def track_admin_status(client: Client, chat_member_updated: ChatMemberUpda
                                 f"یوزرنیم مالک : @{owner_username}\n"
                                 f"مشخصات مالک :{first_name} {last_name}"
                             )
-                            break
+                        break
                     if channel_info_str:
                         await client.send_message(Var.OWNER_ID ,channel.info_str)
                 except Exception as e:
