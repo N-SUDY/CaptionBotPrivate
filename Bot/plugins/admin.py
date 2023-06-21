@@ -1,7 +1,7 @@
 # All Credits Belong to @CipherXBot 
 
 from pyrogram import Client, filters
-from pyrogram.types import Message
+from pyrogram.types import Message, ChatMemberUpdated
 from pyrogram.errors.exceptions.bad_request_400 import ChannelInvalid
 from pyrogram.dispatcher import Dispatcher
 
@@ -9,12 +9,33 @@ from Bot import app
 from Bot.plugins import *
 from Bot.config import Var
 
-@app.on_message(filters.new_chat_members)
-async def new_chat_member(c: Client, m: Message):
-    if (await app.get_me()).id in [user.id for user in m.new_chat_members]:
-        owner = await app.get_users(m.chat.owner_id)
-        owner_info = f"{owner.first_name} {owner.last_name} -Username: ({owner.username})"
-        await c.send_message(Var.OWNER_ID, f"#New_Channel_Added:\nName: {m.chat.title}\nID: {m.chat.id}\nOwner: {owner_info}")
+
+@app.on_chat_member_updated()
+async def track_admin(client: Client, chat_member_updated: ChatMemberUpdated):
+    me = await client.get_me()
+    if chat_member_updated.new_chat_member.user.id == me.id:
+        if chat_member_updated.new_chat_member.status == "administrator":
+            chat_id = chat_member_updated.chat.id
+            try:
+                chat_details = await client.get_chat(chat_id)
+                owner_username, owner_name, owner_info_str  ="Unknown","Unknown","Not Found"
+                async for admin in app.iter_chat_members(chat_details.id, filter="administrators"):
+                    if admin.status == 'creator':
+                        owner_username=admin.user.username or ""
+                        first_name=admin.user.first_name or ""
+                        last_name=admin.user.last_name or ""
+                        owner_info_str=f"{first_name} {last_name}"
+                        break
+                info_message=(
+                    f:"#افزودن_بات\n"
+                    f"نام چنل : {chat_details.title}\n"
+                    f"آیدی چنل : {chat_details.id}\n"
+                    f"یوزرنیم مالک : @{owner_username}\n"
+                    f"مشخصات مالک :{owner_info_str}" 
+                )
+                await client.send_message(Var.OWNER_ID, info_message)
+            except Exception as e:
+                print(f"Error: {str(e)}")
 
 
 @app.on_message(filters.regex("چتز") & filters.incoming & filters.private)
