@@ -14,7 +14,7 @@ from Bot.config import Var
 async def track_admin_status(client: Client, chat_member_updated: ChatMemberUpdated):
     if (
         chat_member_updated.new_chat_member is not None 
-        and chat_member_updated.new_chat.member.user is not None
+        and chat_member_updated.new_chat_member.user is not None
     ):
         me = await client.get_me()
         if chat_member_updated.new_chat.member.user.id == me.id:
