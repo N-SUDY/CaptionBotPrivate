@@ -17,7 +17,7 @@ async def track_admin_status(client: Client, chat_member_updated: ChatMemberUpda
         and chat_member_updated.new_chat_member.user is not None
     ):
         me = await client.get_me()
-        if chat_member_updated.new_chat.member.user.id == me.id:
+        if chat_member_updated.new_chat_member.user.id == me.id:
             if chat.member.updated.status == 'administrator':
                 try:
                     channel_info_str=""
