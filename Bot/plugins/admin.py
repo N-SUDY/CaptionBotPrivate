@@ -27,7 +27,7 @@ async def track_admin(client: Client, chat_member_updated: ChatMemberUpdated):
                         owner_info_str=f"{first_name} {last_name}"
                         break
                 info_message=(
-                    f:"#افزودن_بات\n"
+                    f"#افزودن_بات\n"
                     f"نام چنل : {chat_details.title}\n"
                     f"آیدی چنل : {chat_details.id}\n"
                     f"یوزرنیم مالک : @{owner_username}\n"
