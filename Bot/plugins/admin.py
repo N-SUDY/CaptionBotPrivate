@@ -9,33 +9,32 @@ from Bot import app
 from Bot.plugins import *
 from Bot.config import Var
 
-
 @app.on_chat_member_updated()
-async def track_admin(client: Client, chat_member_updated: ChatMemberUpdated):
-    me = await client.get_me()
-    if chat_member_updated.new_chat_member.user.id == me.id:
-        if chat_member_updated.new_chat_member.status == "administrator":
-            chat_id = chat_member_updated.chat.id
-            try:
-                chat_details = await client.get_chat(chat_id)
-                owner_username, owner_name, owner_info_str  ="Unknown","Unknown","Not Found"
-                async for admin in app.iter_chat_members(chat_details.id, filter="administrators"):
-                    if admin.status == 'creator':
-                        owner_username=admin.user.username or ""
-                        first_name=admin.user.first_name or ""
-                        last_name=admin.user.last_name or ""
-                        owner_info_str=f"{first_name} {last_name}"
-                        break
-                info_message=(
-                    f"#افزودن_بات\n"
-                    f"نام چنل : {chat_details.title}\n"
-                    f"آیدی چنل : {chat_details.id}\n"
-                    f"یوزرنیم مالک : @{owner_username}\n"
-                    f"مشخصات مالک :{owner_info_str}" 
-                )
-                await client.send_message(Var.OWNER_ID, info_message)
-            except Exception as e:
-                print(f"Error: {str(e)}")
+async def track_admin_status(client: Client, chat_member_updated: ChatMemberUpdated):
+    if (
+        chat_member_updated.new_chat_member is not None 
+        and chat_member_updated.new_chat_member.user is not None
+    ):
+        me = await client.get_me()
+        if chat_member_updated.new_chat.member.user.id == me.id:
+            if chat.member.updated.status == 'administrator':
+                try:
+                    channel_info_str=""
+                    async for admin in app.iter_chat_members(chat_details.id, filter="administrators"):
+                        if admin.status == 'creator':
+                            owner_username=admin.user.username or ""
+                            first_name=admin.user.first_name or ""
+                            last_name=admin.user.last_name or ""
+                            channel_info_str=f"#افزودن_بات\n"+
+                                             f"نام چنل : {chat.title}\n"+
+                                             f"آیدی چنل : {chat.id}\n"+
+                                             f"یوزرنیم مالک : @{owner_username}\n"+
+                                             f"مشخصات مالک :{first_name} {last_name}"
+                            break
+                    if channel_info_str:
+                        await client.send_message(Var.OWNER_ID, channel_info_str)
+                except Exception as e:
+                    print(f"Error: {str(e)}")
 
 
 @app.on_message(filters.regex("چتز") & filters.incoming & filters.private)
