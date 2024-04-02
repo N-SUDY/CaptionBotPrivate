@@ -21,4 +21,4 @@ apt upgrade -y
 apt install python wget -y
 pip3 install --no-cache-dir -U -r requirements.txt
 clear
-python3 -m Bot
+python3 -m bot
