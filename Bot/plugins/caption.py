@@ -4,7 +4,7 @@ from pyrogram import Client, filters
 from pyrogram.types import Message
 
 from Bot import app
-from Bot.plugins import * 
+from Bot.plugins import *
 
 
 @app.on_message(filters.private & filters.media, group=4)
@@ -19,16 +19,16 @@ async def incoming(c: Client, m: Message):
                 return
             await m.copy(chat_id=m.chat.id, caption=caption, reply_to_message_id=m.id)
     except Exception as e:
-        return 
+        return
 
 
 async def get_caption(c: Client, m: Message):
-    caption = await c.ask(m.chat.id, "کپشن خود را ارسال نمایید. برای کنسل کردن این فرایند بنویسید `کنسل`")
+    caption = await c.ask(m.chat.id, "Send your caption. Write `cancel` to cancel this process")
     if not caption.text:
-        await caption.reply("کپشنی یافت نشد", quote=True)
+        await caption.reply("No caption found", quote=True)
         return await get_caption(c, m)
-    if caption.text.startswith("کنسل"):
-        await caption.reply("فرایند کنسل شد", quote=True)
+    if caption.text.startswith("cancel"):
+        await caption.reply("Process canceled", quote=True)
         return True
     else:
-        return caption.text 
+        return caption.text
