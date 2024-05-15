@@ -4,7 +4,7 @@ from pyrogram import filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message
 
 from Bot import app
-from Bot.plugins import * 
+from Bot.plugins import *
 
 
 @app.on_message(filters.command("start") & filters.incoming & filters.private)
@@ -18,7 +18,7 @@ async def start(c: Client , m: Message):
                 vf = await verifys(c, m) 
             else:
                 await m.reply(
-                    text=f"""سلام {m.from_user.mention(style="md")} عزیز 🙋🏻‍♂️\nمن بات ادیت کپشن هستم\nفایل تلگرامی خود را ارسال کنید تا کپشن آن را ادیت کنم""",
+                    text=f"Hello {m.from_user.mention(style='md')} 🙋🏻‍♂️\nI'm a Caption Editor Bot\nSend your Telegram file so I can edit its caption.",
                     reply_markup=InlineKeyboardMarkup(
                         [
                             [InlineKeyboardButton('✵ Developer ✵', url='https://t.me/CipherXBot')]
@@ -30,16 +30,15 @@ async def start(c: Client , m: Message):
             return  
 
 
-@app.on_message(filters.regex("راهنما") & filters.incoming & filters.private)
+@app.on_message(filters.regex("help") & filters.incoming & filters.private)
 async def help(c: Client, m: Message):
     id = m.from_user.id
     cmd = m.text.split("_")[-1]
-    if cmd == "راهنما":
+    if cmd == "help":
         try:
             if not id in x:
                 vf = await verifys(c, m) 
             else:
-                await m.reply("〄 راهنمای بات 〄\n✓ افزودن چنل\n✓ بفرس\n✓ آیدی\n〄 همچنین با فرستادن هر فایل به بات می توانید کپشن آن را ادیت کنید.", quote=True) 
+                await m.reply("〄 Bot Help 〄\n✓ Add Channel\n✓ Send\n✓ ID\n〄 Also, you can edit the caption of any file by sending it to the bot.", quote=True) 
         except Exception as e:
             return
-
