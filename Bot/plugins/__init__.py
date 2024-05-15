@@ -12,16 +12,16 @@ PASS = ["ok"]
 async def verifys(c: Client, m: Message):
     id = m.from_user.id
     if not id in x:
-        verify = await m.chat.ask("پسورد را وارد کنید")
+        verify = await m.chat.ask("Enter the password:")
         if verify.text in PASS:
             x.append(id) 
-            await m.reply("شما به لیست ادمین ها افزوده شدید و هم اکنون میتوانید از بات استفاده نمایید", quote=True)
+            await m.reply("You have been added to the admin list and can now use the bot.", quote=True)
             return id
         if not verify.text:
-            await verify.reply("پسوردی یافت نشد", quote=True)
+            await verify.reply("Password not found.", quote=True)
             return await verifys(c, m)
         if not verify.text in PASS:
-            await verify.reply("پسورد اشتباه است و شما نمی‌توانید از بات استفاده نمایید", quote=True)
+            await verify.reply("Incorrect password, you cannot use the bot.", quote=True)
             return True
     else:
         pass
